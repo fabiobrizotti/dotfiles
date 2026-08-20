@@ -1,0 +1,67 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
+    outline: none;
+    border: none;
+}
+
+window {
+    margin: 0px;
+    background-color: rgba(36, 39, 58, 0.92); /* Catppuccin Macchiato Base */
+    border: 2px solid #fc7b53;                 /* Borda Laranja */
+    border-radius: 10px;
+}
+
+#input {
+    margin: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #494d64;
+    color: #cad3f5;
+    background-color: #1e2030;                 /* Mantle */
+}
+
+#input:focus {
+    border: 1px solid #fc7b53;
+}
+
+#inner-box {
+    margin: 5px 12px 12px 12px;
+    background-color: transparent;
+}
+
+#outer-box {
+    margin: 0px;
+    background-color: transparent;
+}
+
+#scroll {
+    margin: 0px;
+}
+
+#text {
+    margin: 5px;
+    color: #cad3f5;
+    font-weight: 500;
+}
+
+#entry {
+    padding: 8px 10px;
+    border-radius: 8px;
+    background-color: transparent;
+    transition: all 0.2s ease;
+}
+
+#entry:selected {
+    background-color: #363a4f;                 /* Surface0 */
+    border-left: 3px solid #fc7b53;            /* Indicador Laranja */
+}
+
+#entry:selected #text {
+    color: #eed49f;                            /* Amarelo Macchiato no texto selecionado */
+    font-weight: bold;
+}
+
+#img {
+    margin-right: 10px;
+}

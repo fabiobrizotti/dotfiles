@@ -140,7 +140,8 @@ hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Escape", hl.dsp.window.close())
 hl.bind("ALT + Tab", hl.dsp.window.cycle_next())
 hl.bind("ALT + SHIFT + Tab", hl.dsp.window.cycle_next({ next = false }))
-
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("kitty --class impala-float -e impala"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("blueman-manager"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(spotify))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
@@ -227,4 +228,19 @@ hl.window_rule({
     name           = "suppress-maximize-events",
     match          = { class = ".*" },
     suppress_event = "maximize",
+})
+hl.window_rule({
+    name = "impala-floating",
+    match = { class = "^(impala-float)$" },
+    float = true,
+    size = "750 450",
+    center = true,
+})
+
+hl.window_rule({
+    name = "blueman-floating",
+    match = { class = "^(blueman-manager)$" },
+    float = true,
+    size = "650 400",
+    center = true,
 })

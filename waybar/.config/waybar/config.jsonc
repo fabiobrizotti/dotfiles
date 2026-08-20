@@ -7,7 +7,6 @@
   "margin-left": 0,
   "margin-right": 0,
   "margin-bottom": 1,
-
   "modules-left": [
     "custom/icon",
     "hyprland/window",
@@ -18,17 +17,17 @@
     "hyprland/workspaces"
   ],
   "modules-right": [
+    "network",
+    "bluetooth",
     "wireplumber",
     "backlight",
     "tray",
     "clock",
     "battery"
   ],
-
   "custom/icon": {
     "format": ""
   },
-
   "hyprland/window": {
     "separate-outputs": true,
     "format": "{class}",
@@ -39,7 +38,6 @@
       "zen": "Browser"
     }
   },
-
   "hyprland/workspaces": {
     "disable-scroll": true,
     "on-click": "activate",
@@ -57,24 +55,29 @@
       "10": "v"
     }
   },
-
   // Módulo de Volume com animação e porcentagem
   "wireplumber": {
     "format": "{icon} {volume}%",
     "format-muted": "󰝟 Mute",
-    "format-icons": ["󰕿", "󰖀", "󰕾"],
+    "format-icons": [
+      "󰕿",
+      "󰖀",
+      "󰕾"
+    ],
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "scroll-step": 5
   },
-
   // Módulo de Brilho
   "backlight": {
     "device": "intel_backlight",
     "format": "{icon} {percent}%",
-    "format-icons": ["󰃞", "󰃟", "󰃠"]
+    "format-icons": [
+      "󰃞",
+      "󰃟",
+      "󰃠"
+    ]
   },
-
-"battery": {
+  "battery": {
     "states": {
       "warning": 30,
       "critical": 15
@@ -82,15 +85,25 @@
     "format": "{capacity}% {icon}",
     "format-charging": "{capacity}% 󰂄",
     "format-plugged": "{capacity}% 󰚥",
-    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    "format-icons": [
+      "󰂎",
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ]
   },
-
   "tray": {
     "icon-size": 16,
     "spacing": 5,
     "show-passive-items": true
   },
-
   "clock": {
     "format": "<span></span>  {:%H:%M}",
     "interval": 1,
@@ -101,7 +114,6 @@
       }
     }
   },
-
   // Módulo de Música
   "mpris": {
     "format": "󰎈 {player_icon} {artist} - {title}",
@@ -116,7 +128,6 @@
     "max-length": 30,
     "interval": 1
   },
-
   // Módulo de Notificações
   "custom/notification": {
     "tooltip": false,
@@ -139,3 +150,28 @@
     "escape": true
   }
 }
+// Módulo de Rede / Wi-Fi
+  "network": {
+    "format-wifi": "󰤨 {essid}",
+    "format-ethernet": "󰈀 Conectado",
+    "format-linked": "󰈀 {ifname} (Sem IP)",
+    "format-disconnected": "󰤭 Desconectado",
+    "tooltip-format-wifi": "Sinal: {signalStrength}% | IP: {ipaddr}",
+    "tooltip-format-ethernet": "Interface: {ifname} | IP: {ipaddr}",
+    "tooltip-format-disconnected": "Sem conexão de rede",
+    "on-click": "kitty --class impala-float -e impala"
+  },
+
+  // Módulo de Bluetooth
+  "bluetooth": {
+    "format": "󰂯 {status}",
+    "format-disabled": "󰂲 Desativado",
+    "format-off": "󰂲 Desligado",
+    "format-connected": "󰂱 {device_alias}",
+    "format-connected-battery": "󰂱 {device_alias} ({device_battery_percentage}%)",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} dispositivo(s) conectado(s)",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} dispositivo(s) conectado(s):\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
+    "on-click": "blueman-manager"
+  },

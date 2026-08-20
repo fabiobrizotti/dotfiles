@@ -1,0 +1,76 @@
+# Formato limpo e em linha dupla
+format = """
+$os$directory$git_branch$git_status$c$rust$golang$nodejs$php$python$cmd_duration
+$character"""
+
+# Não adiciona linha em branco antes do prompt
+add_newline = false
+
+# Indicador do Prompt
+[character]
+success_symbol = "[❯](bold #fc7b53)"
+error_symbol = "[❯](bold #ed8796)"
+
+# Ícone do Arch Linux
+[os]
+format = "[$symbol]($style) "
+style = "bold #eed49f"
+disabled = false
+
+[os.symbols]
+Arch = "󰣇"
+
+# Diretório Atual
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style) "
+style = "bold #fc7b53"
+truncation_length = 3
+truncation_symbol = "…/"
+read_only = " 󰌾"
+
+# Git Branch & Status
+[git_branch]
+format = "on [$symbol$branch]($style) "
+symbol = " "
+style = "bold #f5a97f"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold #ed8796"
+conflicted = "🏳 "
+ahead = "⇡${count} "
+behind = "⇣${count} "
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "
+untracked = "?${count} "
+stashed = "📦 "
+modified = "!${count} "
+staged = "+${count} "
+renamed = "»${count} "
+deleted = "✘${count} "
+
+# Duração do Comando (se demorar mais de 2s)
+[cmd_duration]
+min_time = 2_000
+format = "took [$duration]($style) "
+style = "italic #eed49f"
+
+# Linguagens de Programação
+[nodejs]
+symbol = " "
+style = "bold #a6da95"
+format = "via [$symbol($version )]($style)"
+
+[python]
+symbol = " "
+style = "bold #eed49f"
+format = "via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)"
+
+[rust]
+symbol = "󱘗 "
+style = "bold #f5a97f"
+format = "via [$symbol($version )]($style)"
+
+[golang]
+symbol = " "
+style = "bold #8bd5ca"
+format = "via [$symbol($version )]($style)"

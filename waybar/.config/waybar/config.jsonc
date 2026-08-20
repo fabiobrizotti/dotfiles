@@ -7,6 +7,7 @@
   "margin-left": 0,
   "margin-right": 0,
   "margin-bottom": 1,
+
   "modules-left": [
     "custom/icon",
     "hyprland/window",
@@ -25,9 +26,11 @@
     "clock",
     "battery"
   ],
+
   "custom/icon": {
     "format": ""
   },
+
   "hyprland/window": {
     "separate-outputs": true,
     "format": "{class}",
@@ -38,6 +41,7 @@
       "zen": "Browser"
     }
   },
+
   "hyprland/workspaces": {
     "disable-scroll": true,
     "on-click": "activate",
@@ -48,109 +52,15 @@
       "3": "iii",
       "4": "iv",
       "5": "v",
-      "6": "i",
-      "7": "ii",
-      "8": "iii",
-      "9": "iv",
-      "10": "v"
+      "6": "vi",
+      "7": "vii",
+      "8": "viii",
+      "9": "ix",
+      "10": "x"
     }
   },
-  // Módulo de Volume com animação e porcentagem
-  "wireplumber": {
-    "format": "{icon} {volume}%",
-    "format-muted": "󰝟 Mute",
-    "format-icons": [
-      "󰕿",
-      "󰖀",
-      "󰕾"
-    ],
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "scroll-step": 5
-  },
-  // Módulo de Brilho
-  "backlight": {
-    "device": "intel_backlight",
-    "format": "{icon} {percent}%",
-    "format-icons": [
-      "󰃞",
-      "󰃟",
-      "󰃠"
-    ]
-  },
-  "battery": {
-    "states": {
-      "warning": 30,
-      "critical": 15
-    },
-    "format": "{capacity}% {icon}",
-    "format-charging": "{capacity}% 󰂄",
-    "format-plugged": "{capacity}% 󰚥",
-    "format-icons": [
-      "󰂎",
-      "󰁺",
-      "󰁻",
-      "󰁼",
-      "󰁽",
-      "󰁾",
-      "󰁿",
-      "󰂀",
-      "󰂁",
-      "󰂂",
-      "󰁹"
-    ]
-  },
-  "tray": {
-    "icon-size": 16,
-    "spacing": 5,
-    "show-passive-items": true
-  },
-  "clock": {
-    "format": "<span></span>  {:%H:%M}",
-    "interval": 1,
-    "tooltip-format": "<tt>{calendar}</tt>",
-    "calendar": {
-      "format": {
-        "today": "<span color='#eed49f'><b>{}</b></span>"
-      }
-    }
-  },
-  // Módulo de Música
-  "mpris": {
-    "format": "󰎈 {player_icon} {artist} - {title}",
-    "format-paused": "󰏤 {status_icon} {artist} - {title}",
-    "player-icons": {
-      "default": "▶",
-      "mpd": "🎵"
-    },
-    "status-icons": {
-      "paused": "⏸"
-    },
-    "max-length": 30,
-    "interval": 1
-  },
-  // Módulo de Notificações
-  "custom/notification": {
-    "tooltip": false,
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "<span foreground='red'><sup>󰰔</sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='red'><sup>󰰔</sup></span>",
-      "dnd-none": "",
-      "inhibited-notification": "<span foreground='red'><sup>󰰔</sup></span>",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='red'><sup>󰰔</sup></span>",
-      "dnd-inhibited-none": ""
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
-  }
-}
-// Módulo de Rede / Wi-Fi
+
+  // Módulo de Rede / Wi-Fi
   "network": {
     "format-wifi": "󰤨 {essid}",
     "format-ethernet": "󰈀 Conectado",
@@ -175,3 +85,86 @@
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
     "on-click": "blueman-manager"
   },
+
+  // Módulo de Volume
+  "wireplumber": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 Mute",
+    "format-icons": ["󰕿", "󰖀", "󰕾"],
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "scroll-step": 5
+  },
+
+  // Módulo de Brilho
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-icons": ["󰃞", "󰃟", "󰃠"]
+  },
+
+  // Módulo de Bateria
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% 󰂄",
+    "format-plugged": "{capacity}% 󰚥",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 5,
+    "show-passive-items": true
+  },
+
+  "clock": {
+    "format": "<span></span>  {:%H:%M}",
+    "interval": 1,
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "format": {
+        "today": "<span color='#eed49f'><b>{}</b></span>"
+      }
+    }
+  },
+
+  // Módulo de Música
+  "mpris": {
+    "format": "󰎈 {player_icon} {artist} - {title}",
+    "format-paused": "󰏤 {status_icon} {artist} - {title}",
+    "player-icons": {
+      "default": "▶",
+      "mpd": "🎵"
+    },
+    "status-icons": {
+      "paused": "⏸"
+    },
+    "max-length": 30,
+    "interval": 1
+  },
+
+  // Módulo de Notificações
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup>󰰔</sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup>󰰔</sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup>󰰔</sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup>󰰔</sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  }
+}

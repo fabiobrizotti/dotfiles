@@ -1,0 +1,141 @@
+{
+  "layer": "top",
+  "reload_on_style_change": true,
+  "position": "top",
+  "spacing": 10,
+  "margin-top": 0,
+  "margin-left": 0,
+  "margin-right": 0,
+  "margin-bottom": 1,
+
+  "modules-left": [
+    "custom/icon",
+    "hyprland/window",
+    "mpris",
+    "custom/notification"
+  ],
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "wireplumber",
+    "backlight",
+    "tray",
+    "clock",
+    "battery"
+  ],
+
+  "custom/icon": {
+    "format": ""
+  },
+
+  "hyprland/window": {
+    "separate-outputs": true,
+    "format": "{class}",
+    "rewrite": {
+      "": "Brizotti",
+      "kitty": "Brizotti",
+      "vesktop": "Discord",
+      "zen": "Browser"
+    }
+  },
+
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
+      "1": "i",
+      "2": "ii",
+      "3": "iii",
+      "4": "iv",
+      "5": "v",
+      "6": "i",
+      "7": "ii",
+      "8": "iii",
+      "9": "iv",
+      "10": "v"
+    }
+  },
+
+  // Módulo de Volume com animação e porcentagem
+  "wireplumber": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 Mute",
+    "format-icons": ["󰕿", "󰖀", "󰕾"],
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "scroll-step": 5
+  },
+
+  // Módulo de Brilho
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-icons": ["󰃞", "󰃟", "󰃠"]
+  },
+
+"battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% 󰂄",
+    "format-plugged": "{capacity}% 󰚥",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 5,
+    "show-passive-items": true
+  },
+
+  "clock": {
+    "format": "<span></span>  {:%H:%M}",
+    "interval": 1,
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "format": {
+        "today": "<span color='#eed49f'><b>{}</b></span>"
+      }
+    }
+  },
+
+  // Módulo de Música
+  "mpris": {
+    "format": "󰎈 {player_icon} {artist} - {title}",
+    "format-paused": "󰏤 {status_icon} {artist} - {title}",
+    "player-icons": {
+      "default": "▶",
+      "mpd": "🎵"
+    },
+    "status-icons": {
+      "paused": "⏸"
+    },
+    "max-length": 30,
+    "interval": 1
+  },
+
+  // Módulo de Notificações
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup>󰰔</sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup>󰰔</sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup>󰰔</sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup>󰰔</sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  }
+}

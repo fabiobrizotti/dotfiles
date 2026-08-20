@@ -1,0 +1,218 @@
+@define-color rosewater #f4dbd6;
+@define-color flamingo #f0c6c6;
+@define-color pink #f5bde6;
+@define-color mauve #c6a0f6;
+@define-color red #ed8796;
+@define-color maroon #ee99a0;
+@define-color peach #f5a97f;
+@define-color yellow #eed49f;
+@define-color green #a6da95;
+@define-color teal #8bd5ca;
+@define-color sky #91d7e3;
+@define-color sapphire #7dc4e4;
+@define-color blue #8aadf4;
+@define-color lavender #b7bdf8;
+@define-color text #cad3f5;
+@define-color subtext1 #b8c0e0;
+@define-color subtext0 #a5adcb;
+@define-color overlay2 #939ab7;
+@define-color overlay1 #8087a2;
+@define-color overlay0 #6e738d;
+@define-color surface2 #5b6078;
+@define-color surface1 #494d64;
+@define-color surface0 #363a4f;
+@define-color base #24273a;
+@define-color mantle #1e2030;
+@define-color crust #181926;
+@define-color orange #fc7b53;
+@define-color orangebackground #22062b;
+
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  border: none;
+  min-height: 0;
+}
+
+window#waybar {
+  /* border: 1px solid alpha(@blue, 0.85); */
+  background-color: alpha(@orangebackground, 0.75);
+  /* border-radius: 0 0 0.2rem 0.2rem; */
+  border-radius: 0;
+  color: @sapphire;
+  padding: 2px 12px;
+  /* background-color: transparent; */
+  transition: 0.3s all;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  /* border: 2px solid alpha(@blue, 0.85); */
+  /* background-color: alpha(@base, 0.75); */
+  /* border-radius: 8px;
+  padding: 2px 12px; */
+  padding: 0 1rem;
+  color: @orange;
+  border: none;
+}
+
+.modules-center {
+  padding: 2px;
+}
+
+#custom-icon {
+  font-size: 15px;
+  padding-right: 5px;
+}
+
+#window {
+  font-weight: bold;
+  color: @orange;
+  transition: all 0.3s ease;
+}
+
+#workspaces {
+  font-weight: bold;
+  font-size: 12px;
+  border: none;
+}
+
+#workspaces button {
+  color: @orange;
+  border-radius: 0;
+  transition: 0.2s ease-out;
+  border-bottom: 1px solid transparent;
+}
+
+#workspaces button:first-child {
+  /* border-bottom-left-radius: 4px; */
+}
+
+#workspaces button:last-child {
+  /* border-bottom-right-radius: 4px; */
+}
+
+#workspaces button.urgent {
+  border-bottom: 1px solid @blue;
+}
+
+#workspaces button.active {
+  border-bottom: 1px solid @yellow;
+  color: @yellow;
+}
+
+#tray {
+  color: @orange;
+}
+
+#clock {
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+#clock:hover {
+  color: @yellow;
+}
+
+#battery {
+  color: @orange;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+#battery:hover {
+  color: @yellow;
+}
+
+/* Aumenta ligeiramente o tamanho apenas do ícone da bateria */
+#battery span,
+#battery .icon {
+  font-size: 14px;
+}
+
+/* BATERIA */
+/* Estilo Padrão */
+#battery {
+    color: #fc7b53;
+}
+
+/* Quando entra em warning (<= 30%) */
+#battery.warning {
+    color: #ffaa00;
+}
+
+/* Quando entra em critical (<= 15%) */
+#battery.critical {
+    color: #ff5555;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Quando está carregando ou plugado em 100% */
+#battery.charging,
+#battery.plugged {
+    color: #50fa7b;
+    animation-name: blink;
+    animation-duration: 1s; /* Deixei mais suave (1s) para não incomodar quando cheia */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Define o efeito de piscar (fade in / fade out) */
+@keyframes blink {
+    to {
+        color: #ffffff;
+        opacity: 0.5;
+    }
+}
+
+
+#wireplumber,
+#backlight {
+  color: @orange;
+  font-weight: bold;
+  padding: 0 8px;
+  transition: all 0.3s ease;
+}
+
+#wireplumber:hover,
+#backlight:hover {
+  color: @orange;
+}
+
+#wireplumber.muted {
+  color: @red;
+}
+
+/* Módulo de Notificação */
+#custom-notification {
+  padding: 0 10px;
+  color: @orange;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+#custom-notification:hover {
+  color: @yellow;
+}
+
+/* Módulo de Mídia / Spotify */
+#mpris {
+  padding: 0 12px;
+  color: @green;
+  font-weight: bold;
+  background-color: alpha(@surface0, 0.5);
+  border-radius: 8px;
+  margin: 2px 5px;
+  transition: all 0.3s ease;
+}
+
+#mpris.paused {
+  color: @subtext0;
+  background-color: transparent;
+}

@@ -48,3 +48,8 @@ eval "$(starship init zsh)"
 # Integração do FZF (Ctrl + R para histórico / Ctrl + T para arquivos)
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+
+# Git & Docker TUI Aliases
+alias lg="lazygit"
+alias lzd="lazydocker"
+alias dps="docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'"

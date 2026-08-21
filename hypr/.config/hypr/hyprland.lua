@@ -19,6 +19,9 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("swayosd-server")
   hl.exec_cmd("swaync")
   hl.exec_cmd("hypridle")
+  -- Autostart Clipboard Watcher
+  hl.exec_cmd("wl-paste --type text --watch cliphist store")
+  hl.exec_cmd("wl-paste --type image --watch cliphist store")
 end)
 
 -- Variáveis de Ambiente para GTK, Qt e Cursores
@@ -142,6 +145,7 @@ hl.bind("ALT + Tab", hl.dsp.window.cycle_next())
 hl.bind("ALT + SHIFT + Tab", hl.dsp.window.cycle_next({ next = false }))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("kitty --class impala-float -e impala"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("blueman-manager"))
+hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("cliphist list | wofi --dmenu --prompt 'Histórico de Cópia...' | cliphist decode | wl-copy"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(spotify))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))

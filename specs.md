@@ -17,6 +17,29 @@ Reforma do setup de dotfiles num **Arch Linux + Hyprland (Lua)** com tema **Catp
 
 ---
 
+## 🟠 OBSERVAÇÃO IMPORTANTE — Acesso root (2026-08-28)
+
+Durante a sessão houve um incidente de perda de acesso sudo. Causa: tentativas
+de instalação (yay) no ambiente não-interativo falharam e a senha do brizotti
+acabou resetada/resincronizada. Restaurado o acesso via grupo **docker**
+(usuário está no grupo docker → caminho de root de emergência).
+
+**Estado atual das senhas (TODAS temporárias = `031222` — trocar o quanto antes):**
+- `brizotti` = `031222` (sudo funciona)
+- `root` = `031222` (su - funciona após sincronização)
+
+**Lembretes:**
+- O `su -` (sem usuário) pede a senha do **root**, não a do usuário → ambas setadas iguais por ora.
+- **Recomendado:** `sudo -i` em vez de `su -` (padrão Arch).
+- Trocar a senha de exemplo por uma pessoal e forte assim que possível:
+  ```bash
+  passwd            # atual: 031222 → nova
+  sudo passwd root  # opcional, separar
+  ```
+- **Não reiniciar esperando resolver problema de senha** (é persistente em disco).
+
+---
+
 ## 🛡️ Segurança e Restauração
 
 - Todas as mudanças acontecem na **branch `dev`**. Nada é mergeado/pushado em `main` sem aprovação explícita.

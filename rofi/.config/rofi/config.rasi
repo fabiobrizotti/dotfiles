@@ -1,0 +1,146 @@
+/* ============================================================================
+   ROFI "GLASS" — tema Catppuccin Macchiato + laranja
+   Launcher transparente para o blur do Hyprland aparecer por trás.
+   Compatível com rofi-wayland (formato .rasi).
+   ============================================================================ */
+
+configuration {
+    modi:                       "drun,run,calc";
+    show-icons:                 true;
+    icon-theme:                 "Papirus-Dark";
+    font:                       "JetBrainsMono Nerd Font 14";
+
+    display-drun:               " 󰀄  Aplicativos  ";
+    display-run:                " 󰫑  Executar  ";
+    display-calc:               " 󰪚  Calculadora  ";
+
+    /* Comportamento */
+    case-sensitive:             false;
+    matching:                   fuzzy;
+    scroll-method:              0;
+    disable-history:            false;
+    sort:                       true;
+    sorting-method:             "filesystem";
+
+    /* Largura dos campos */
+    drun-display-format:        "{icon} {name}";
+    use-hot-key:                true;
+}
+
+/* ============================== Tema Glass ============================= */
+* {
+    /* Paleta Macchiato */
+    base:     rgba (36, 39, 58, 0.55);
+    mantle:   rgba (30, 32, 48, 0.60);
+    crust:    rgba (24, 25, 38, 0.60);
+    surface0: rgba (54, 58, 79, 0.40);
+    surface1: rgba (73, 77, 100, 0.45);
+    text:     rgba (202, 211, 245, 1.00);
+    subtext0: rgba (165, 173, 203, 1.00);
+    orange:   rgba (252, 123, 83, 1.00);
+    peach:    rgba (245, 169, 127, 1.00);
+    yellow:   rgba (238, 212, 159, 1.00);
+    red:      rgba (237, 135, 150, 1.00);
+
+    /* Tipografia/forma */
+    font:     "JetBrainsMono Nerd Font 14";
+    radius:   12px;
+    spacing:  12px;
+}
+
+window {
+    transparency:                "real";
+    background-color:            @mantle;
+    border-radius:               @radius;
+    border:                      2px solid @orange;
+    width:                       40%;
+    margin:                      0px;
+    padding:                     0px;
+    location:                    center;
+    anchor:                      center;
+    text-color:                  @text;
+}
+
+mainbox {
+    background-color:            transparent;
+    border-radius:               @radius;
+    padding:                     14px;
+    spacing:                     10px;
+    text-color:                  @text;
+}
+
+inputbar {
+    background-color:            @surface0;
+    border-radius:               10px;
+    padding:                     0px 12px;
+    margin:                      0px 0px 8px 0px;
+    spacing:                     8px;
+    text-color:                  @text;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+    background-color:            transparent;
+    padding:                     0px;
+    text-color:                  @orange;
+    font:                        "JetBrainsMono Nerd Font 16";
+}
+
+entry {
+    background-color:            transparent;
+    padding:                     0px 8px;
+    text-color:                  @text;
+    cursor:                      "default";
+    placeholder:                 "Pesquisar...";
+}
+
+listview {
+    background-color:            transparent;
+    padding:                     0px;
+    border-radius:               @radius;
+    columns:                     1;
+    lines:                       7;
+    spacing:                     4px;
+}
+
+element {
+    background-color:            transparent;
+    border-radius:               8px;
+    padding:                     8px 10px;
+    text-color:                  @text;
+}
+
+element selected {
+    background-color:            alpha (@orange, 0.85);
+    text-color:                  @crust;
+    border-radius:               8px;
+}
+
+element normal.normal {
+    text-color:                  @text;
+}
+
+element normal.urgent {
+    text-color:                  @red;
+}
+
+element icon {
+    size:                        22px;
+    margin:                      0px 10px 0px 0px;
+}
+
+element-text {
+    text-color:                  inherit;
+}
+
+message {
+    background-color:            transparent;
+    text-color:                  @subtext0;
+    border-radius:               @radius;
+    padding:                     8px;
+}
+
+messagebar {
+    background-color:            transparent;
+    border-radius:               @radius;
+}

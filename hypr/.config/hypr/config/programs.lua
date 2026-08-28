@@ -5,7 +5,8 @@
 PROGRAMS = {
     terminal    = "kitty",
     fileManager = "nemo",
-    menu        = "wofi --show drun",
+    menu        = "rofi -show drun",
     spotify     = "spotify",
     browser     = "firefox",
+    dmenu       = "rofi -dmenu",
 }

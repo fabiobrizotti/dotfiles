@@ -238,7 +238,7 @@ _(preencher a cada fase)_
 | `f2aef39` | J | Declara PATH do uv no zshrc + adiciona AGENTS.md (contexto da sessão) |
 | `153d4c8` | K | Descomissiona wofi (rofi é o launcher), remove do stow e atualiza README+AGENTS |
 | `020c660` | docs | Documenta load absoluto do hypr/config e remove wofi dos PACKAGES no AGENTS |
-| `3408fcd` | fix | Reverte launcher: rofi → **wofi** (rofi 2.0 quebra parse de tema); restaura `wofi/`, atualiza programs/stow/README/AGENTS |
+| `47bf5dc` | fix | Reverte launcher: rofi → **wofi** (rofi 2.0 quebra parse de tema); restaura `wofi/`, atualiza programs/stow/README/AGENTS |
 
 ---
 

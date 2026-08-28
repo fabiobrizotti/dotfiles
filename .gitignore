@@ -1,0 +1,25 @@
+# =============================================================================
+# GITIGNORE DOS DOTFILES
+# =============================================================================
+
+# Wallpapers e mídias grandes (mantidos fora do repositório)
+wallpaper/
+*.jpg
+*.jpeg
+*.png
+*.webp
+
+# Caches e dados locais que não devem ser versionados
+.cache/
+history.zsh
+.zsh_history
+.local/
+
+# Configurações com segredos/caminhos pessoais não portáveis
+**/secrets/
+*.token
+*.key
+
+# Artefatos do sistema que não fazem parte da configuração
+.cache/
+session/

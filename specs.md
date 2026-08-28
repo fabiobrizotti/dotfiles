@@ -81,9 +81,16 @@ acabou resetada/resincronizada. Restaurado o acesso via grupo **docker**
 - [x] `setup/install-deps.sh` criado
 
 ### Fase 1 — Instalar dependências de tema
-- [ ] `bibata-cursor-theme`
-- [ ] `kvantum`
-- [ ] `papirus-folders -C orange` persistente
+- [x] `bibata-cursor-theme`
+- [x] `kvantum` (já instalado; configurar na Fase 2)
+- [x] `papirus-folders -C orange` persistente
+
+> **Nota de instalação do bibata:** o yay parou na compilação (sem `.pkg.tar.zst`).
+> Compilei manualmente via `makepkg` (dep `python-clickgen` já instalado) e instalei
+> via `pacman -U --overwrite '/usr/share/icons/*' <pkg>` (registrado como
+> `bibata-cursor-theme 2.0.7-1`). **Correção aplicada:** todos os 12 temas tiveram
+> `Inherits="hicolor"` → `Inherits=hicolor` (sem aspas), senão o cursor não renderiza.
+> gsettings já aponta para `Bibata-Modern-Classic` (via hyprland.lua autostart).
 
 ### Fase 2 — Unificação visual
 - [x] Waybar: remover cores Dracula, padronizar Nerd Font, remover `macchiato.css`

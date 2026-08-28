@@ -53,3 +53,34 @@ eval "$(starship init zsh)"
 alias lg="lazygit"
 alias lzd="lazydocker"
 alias dps="docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'"
+
+# =============================================================================
+# MANUTENÇÃO DO SISTEMA
+# =============================================================================
+# Atualizar o sistema (pacman + AUR) e salvar backup de pacotes
+update() {
+    sudo pacman -Syu --noconfirm
+    yay -Sua --noconfirm
+    [ -x ~/dotfiles/setup/bkp-pacotes.sh ] && ~/dotfiles/setup/bkp-pacotes.sh
+}
+
+# Remover pacotes órfãos (não são dependência de nada)
+cleanup() {
+    local orphans
+    orphans=$(pacman -Qtdq 2>/dev/null)
+    if [ -n "$orphans" ]; then
+        sudo pacman -Rns --noconfirm $orphans
+    else
+        echo "Nenhum pacote órfão para limpar."
+    fi
+}
+
+# Limpar cache do pacman que não está em uso
+cleancache() {
+    sudo pacman -Sc --noconfirm
+}
+
+# Backup rápido da lista de pacotes instalados
+bkp-pacotes() {
+    [ -x ~/dotfiles/setup/bkp-pacotes.sh ] && ~/dotfiles/setup/bkp-pacotes.sh
+}

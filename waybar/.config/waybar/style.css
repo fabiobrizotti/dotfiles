@@ -30,6 +30,7 @@
 
 * {
   font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
   border: none;
   min-height: 0;
 }
@@ -41,7 +42,8 @@ window#waybar {
   border-bottom: 1px solid alpha(@orange, 0.45);
   border-radius: 0;
   color: @sapphire;
-  padding: 2px 12px;
+  padding: 6px 12px;
+  min-height: 36px;
   transition: 0.3s all;
 }
 
@@ -51,6 +53,7 @@ window#waybar {
   padding: 0 1rem;
   color: @orange;
   border: none;
+  min-height: 32px;
 }
 
 .modules-center {
@@ -58,7 +61,7 @@ window#waybar {
 }
 
 #custom-icon {
-  font-size: 15px;
+  font-size: 16px;
   padding-right: 5px;
 }
 
@@ -70,19 +73,22 @@ window#waybar {
 
 #workspaces {
   font-weight: bold;
-  font-size: 12px;
+  font-size: 11px;
   border: none;
 }
 
 #workspaces button {
   color: @orange;
-  padding: 0 6px;
-  border-radius: 8px;
-  transition: 0.2s ease-out;
+  padding: 0 8px;
+  border-radius: 10px;
+  margin: 0 2px;
+  transition: background 0.3s ease,
+              color 0.3s ease,
+              border-radius 0.3s ease;
 }
 
 #workspaces button:hover {
-  background: alpha(@surface1, 0.4);
+  background: alpha(@surface1, 0.55);
 }
 
 #workspaces button.urgent {
@@ -92,6 +98,7 @@ window#waybar {
 #workspaces button.active {
   background: alpha(@orange, 0.85);
   color: @crust;
+  border-radius: 12px;
 }
 
 #tray {

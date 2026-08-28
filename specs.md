@@ -211,6 +211,21 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 
 ---
 
+## 🪟 Reforma Waybar — altura + UX (2026-08-28)
+
+> **Objetivo:** corrigir desproporção visual da barra (muito baixa) e das pills dos
+> workspaces, além de adicionar animação suave de troca de workspace.
+
+**Mudanças em `waybar/.config/waybar/style.css`:**
+- **Altura:** barra de ~22px → **36px** (`window#waybar` padding `6px 12px` + `min-height: 36px`; `.modules-*` `min-height: 32px`).
+- **Fontes proporcionais:** base global `13px` no `*`; `#custom-icon` 16px (logo); `#workspaces` 11px; ícone da bateria 14px. Antes tudo estava inflado/desproporcional.
+- **Pills dos workspaces menores com respiro:** `padding: 0 8px`, `border-radius: 10px` (12px no ativo), `margin: 0 2px` — não mais grudadas na linha laranja de baixo nem no topo da tela.
+- **Transição suave de troca:** `transition: background/color/border-radius 0.3s ease` nas pills → crossfade suave de cor entre workspaces (a antiga volta a laranja-claro enquanto a nova fica laranja-crust).
+
+> **⚠️ Limitação do parser GTK CSS do waybar:** **`transform`/`scale` NÃO são propriedades válidas** no waybar (erro `'transform' is not a valid property name`). Portanto **não é possível** um indicador de workspace que "desliza" lateralmente via CSS puro. Efeitos testados e descartados: `transform` (inválido), glow/`box-shadow` + `@keyframes` na pill ativa (causava "apagar e acender", não era contínuo). Solução final adotada = **crossfade de cor** via `transition` (Opção A), que é suave e limpo. Um deslize real exigiria módulo custom com script (mais complexo/frágil) — deixado como melhoria futura não-bloqueante.
+
+---
+
 ## 📝 Histórico de commits / mudanças
 
 _(preencher a cada fase)_
@@ -240,6 +255,7 @@ _(preencher a cada fase)_
 | `153d4c8` | K | Descomissiona wofi (rofi é o launcher), remove do stow e atualiza README+AGENTS |
 | `020c660` | docs | Documenta load absoluto do hypr/config e remove wofi dos PACKAGES no AGENTS |
 | `47bf5dc` | fix | Reverte launcher: rofi → **wofi** (rofi 2.0 quebra parse de tema); restaura `wofi/`, atualiza programs/stow/README/AGENTS |
+| `4` | waybar | Altura + UX: barra 22px → **36px**, fontes proporcionais (base 13px), pills dos workspaces menores com respiro (raio 10/12, padding 0-8px, margin 2px) e transição suave de cor na troca de workspace |
 
 ---
 

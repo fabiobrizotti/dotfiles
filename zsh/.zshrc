@@ -84,3 +84,6 @@ cleancache() {
 bkp-pacotes() {
     [ -x ~/dotfiles/setup/bkp-pacotes.sh ] && ~/dotfiles/setup/bkp-pacotes.sh
 }
+
+# Adiciona o PATH do uv (gerencia ferramentas Python locais em ~/.local/bin)
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"

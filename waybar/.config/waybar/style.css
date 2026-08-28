@@ -25,7 +25,7 @@
 @define-color mantle #1e2030;
 @define-color crust #181926;
 @define-color orange #fc7b53;
-@define-color orangebackground #22062b;
+@define-color peach #f5a97f;
 
 
 * {
@@ -35,23 +35,19 @@
 }
 
 window#waybar {
-  /* border: 1px solid alpha(@blue, 0.85); */
-  background-color: alpha(@orangebackground, 0.75);
-  /* border-radius: 0 0 0.2rem 0.2rem; */
+  /* Fundo "glass": mantle translúcido — o Hyprland blura o que está por trás.
+     (blur já habilitado em look.lua; basta alfa < 1 nesta superfície) */
+  background-color: rgba(30, 32, 48, 0.55);
+  border-bottom: 1px solid alpha(@orange, 0.45);
   border-radius: 0;
   color: @sapphire;
   padding: 2px 12px;
-  /* background-color: transparent; */
   transition: 0.3s all;
 }
 
 .modules-left,
 .modules-center,
 .modules-right {
-  /* border: 2px solid alpha(@blue, 0.85); */
-  /* background-color: alpha(@base, 0.75); */
-  /* border-radius: 8px;
-  padding: 2px 12px; */
   padding: 0 1rem;
   color: @orange;
   border: none;
@@ -80,26 +76,22 @@ window#waybar {
 
 #workspaces button {
   color: @orange;
-  border-radius: 0;
+  padding: 0 6px;
+  border-radius: 8px;
   transition: 0.2s ease-out;
-  border-bottom: 1px solid transparent;
 }
 
-#workspaces button:first-child {
-  /* border-bottom-left-radius: 4px; */
-}
-
-#workspaces button:last-child {
-  /* border-bottom-right-radius: 4px; */
+#workspaces button:hover {
+  background: alpha(@surface1, 0.4);
 }
 
 #workspaces button.urgent {
-  border-bottom: 1px solid @blue;
+  color: @blue;
 }
 
 #workspaces button.active {
-  border-bottom: 1px solid @yellow;
-  color: @yellow;
+  background: alpha(@orange, 0.85);
+  color: @crust;
 }
 
 #tray {

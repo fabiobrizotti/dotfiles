@@ -119,14 +119,18 @@ dificuldade de trocar workspaces. Com o `hyprland.lua` correto aplicando todos o
 comportamento foi restaurado (59 binds → workspaces funcionando).
 
 ### Fase 4 — Melhorias de UX
-- [ ] Kitty tab bar alinhada às bordas arredondadas
-- [ ] Aliases de manutenção no zsh (`update`, `cleanup`, `mirrors`)
-- [ ] Wallpaper manager simples (lista/rotação)
+- [x] Kitty: padding 12px, opacidade 0.85, `hide_window_decorations` (alinha ao README/Hyprland)
+- [x] zsh: aliases de manutenção `update`, `cleanup`, `cleancache`, `bkp-pacotes`
+- [x] Wallpaper: validado — hyprpaper funcional (monitor `eDP-1`, `default.jpg` 1920x1080, fallback `cover`)
 
 ### Fase 5 — Validação final
-- [ ] `hyprctl reload` sem erros em todos os configs
-- [ ] Commit por fase na branch `dev`
-- [ ] `specs.md` atualizado ao final de cada fase
+- [x] `hyprctl reload` sem erros → `ok`
+- [x] Binds ativos: **59** (workspaces + apps + mídia + captura)
+- [x] Workspaces: `dispatch workspace N` OK
+- [x] Processos essenciais rodando: waybar, hyprpaper, swaync, swayosd-server, hypridle
+- [x] gsettings coerente (Bibata, Papirus-Dark, adw-gtk3-dark)
+- [x] Sem erros no log/parse do Hyprland
+- [x] Commit por fase na branch `dev`; `specs.md` atualizado a cada fase
 
 ---
 
@@ -147,6 +151,17 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 
 ---
 
+## 🔍 Decisões do replanejamento (validação pós-reforma)
+
+- **Waybar**: fundo roxo escuro `#22062b` + texto azul **mantidos** (escolha explícita do usuário; não tratado como inconsistência).
+- **`dotpush`**: **mantido** com `git push` (usuário gerencia push manualmente; regra de não-push no `dev` vale para as execuções de sessão, não para o alias).
+- **`gtk-4.0/` (vazio)**: removido do pacote Stow — o `~/.config/gtk-4.0` real é gerado por `nwg-look`/adw-gtk3 (symlinks externos), não pelos dotfiles.
+- **Qt**: mantido `style=Fusion` (seguro; Kvantum fica como melhoria opcional futura).
+- **ATENÇÃO (upgrade futuro do Hyprland)**: o config usa a **API Lua (`hyprlua`/`hl.*`)**, experimental no 0.56. Ao atualizar o Hyprland, verificar compatibilidade do formato Lua; alternativa é migrar para `hyprlang` clássico se quebrar.
+- **🔐 SENHAS TEMPORÁRIAS:** `brizotti` e `root` estão com senha `031222` (restaurada via docker/chroot durante incidente). **TROCAR O QUANTO ANTES.**
+
+---
+
 ## 📝 Histórico de commits / mudanças
 
 _(preencher a cada fase)_
@@ -154,6 +169,16 @@ _(preencher a cada fase)_
 | Commit/Ref | Fase | Descrição |
 |-----------|------|-----------|
 | `backup-pre-dev` | — | Estado original imutável (baseline) |
+| `c8fb328` | 0 | Fundação segura: branch `dev`, tag, specs.md, scripts setup |
+| `9c6d8b9` | docs | Registra incidente de acesso root e senhas temporárias |
+| `9dcd96b` | 2 | Waybar: cores Catppuccin, Nerd Font, remove macchiato.css |
+| `6c1cacd` | 1 | bibata-cursor-theme movido para lista AUR |
+| `667d00f` | 2 | GTK: fonte JetBrains Nerd + cursor Bibata (GTK-2/3) |
+| `73b872f` | 3 | Hyprland modular via `dofile` (config/*.lua) |
+| `a4ad637` | 1 | Bibata compilado manualmente + `pacman -U` + Inherits corrigido |
+| `d808cc1` | 2 | Qt mantém Fusion; cursores Bibata instalados |
+| `2b889df` | 4 | zsh: aliases de manutenção `update`/`cleanup`/`cleancache`/`bkp-pacotes` |
+| `f8c5d56` | 4 | kitty: padding 12px, opacidade 0.85, hide_window_decorations |
 
 ---
 

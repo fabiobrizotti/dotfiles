@@ -1,0 +1,129 @@
+/* Importa a tua paleta do Macchiato se quiseres usar as variáveis diretas,
+   ou podes usar as cores definidas abaixo */
+
+@define-color base #24273a;
+@define-color mantle #1e2030;
+@define-color crust #181926;
+@define-color text #cad3f5;
+@define-color subtext0 #a5adcb;
+@define-color overlay0 #6e738d;
+@define-color surface0 #363a4f;
+@define-color surface1 #494d64;
+@define-color orange #fc7b53;
+@define-color yellow #eed49f;
+@define-color red #ed8796;
+@define-color blue #8aadf4;
+
+* {
+  font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+  font-size: 14px;
+}
+
+/* --- PAINEL LATERAL (CONTROL CENTER) --- */
+.control-center {
+  background: rgba(30, 32, 48, 0.92); /* Mantle transparente */
+  border: 2px solid @orange;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  padding: 12px;
+  color: @text;
+}
+
+/* --- NOTIFICAÇÕES (POP-UPS NA TELA E DENTRO DO PAINEL) --- */
+.notification-row {
+  outline: none;
+  margin: 6px 0px;
+}
+
+.notification {
+  background: @surface0;
+  border: 1px solid @surface1;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.notification-content {
+  background: transparent;
+  padding: 6px;
+}
+
+.close-button {
+  background: @surface1;
+  color: @text;
+  border-radius: 50%;
+  padding: 2px;
+  margin: 4px;
+}
+
+.close-button:hover {
+  background: @red;
+  color: @crust;
+}
+
+/* Textos da notificação */
+.summary {
+  font-weight: bold;
+  font-size: 14px;
+  color: @orange;
+}
+
+.body {
+  font-size: 12px;
+  color: @text;
+}
+
+.time {
+  font-size: 10px;
+  color: @subtext0;
+}
+
+/* Urgência Crítica */
+.notification.critical {
+  border: 2px solid @red;
+}
+
+.notification.critical .summary {
+  color: @red;
+}
+
+/* --- WIDGETS DO CENTRO DE NOTIFICAÇÕES --- */
+
+/* Título superior (ex: "Notificações") */
+.widget-title {
+  color: @orange;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 8px;
+}
+
+.widget-title > button {
+  background: @surface0;
+  color: @text;
+  border: 1px solid @surface1;
+  border-radius: 8px;
+  padding: 4px 12px;
+}
+
+.widget-title > button:hover {
+  background: @orange;
+  color: @crust;
+}
+
+/* Botão de Modo Não Perturbar (DND) */
+.widget-dnd {
+  background: @surface0;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin: 8px 0px;
+  color: @text;
+}
+
+.widget-dnd > switch {
+  background: @surface1;
+  border-radius: 12px;
+}
+
+.widget-dnd > switch:checked {
+  background: @orange;
+}

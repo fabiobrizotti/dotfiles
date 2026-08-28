@@ -86,7 +86,7 @@ acabou resetada/resincronizada. Restaurado o acesso via grupo **docker**
 - [ ] `papirus-folders -C orange` persistente
 
 ### Fase 2 — Unificação visual
-- [ ] Waybar: remover cores Dracula, padronizar Nerd Font, remover `macchiato.css`
+- [x] Waybar: remover cores Dracula, padronizar Nerd Font, remover `macchiato.css`
 - [ ] GTK: fonte JetBrains Nerd, cursor Bibata, `gtk.css` na paleta
 - [ ] Qt: tema escuro coeso via kvantum/qt6ct (Catppuccin para Qt)
 - [ ] Cursores: instalar, setar `Indexed`, padronizar em gsettings+GTK+Qt

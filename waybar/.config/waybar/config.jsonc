@@ -133,14 +133,14 @@
 
   // Módulo de Música
   "mpris": {
-    "format": "󰎈 {player_icon} {artist} - {title}",
+    "format": "󰋋 {player_icon} {artist} - {title}",
     "format-paused": "󰏤 {status_icon} {artist} - {title}",
     "player-icons": {
-      "default": "▶",
-      "mpd": "🎵"
+      "default": "󰎆",
+      "mpd": "󰎆"
     },
     "status-icons": {
-      "paused": "⏸"
+      "paused": "󰏤"
     },
     "max-length": 30,
     "interval": 1

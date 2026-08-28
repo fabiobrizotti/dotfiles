@@ -134,17 +134,17 @@ window#waybar {
 /* BATERIA */
 /* Estilo Padrão */
 #battery {
-    color: #fc7b53;
+    color: @orange;
 }
 
 /* Quando entra em warning (<= 30%) */
 #battery.warning {
-    color: #ffaa00;
+    color: @yellow;
 }
 
 /* Quando entra em critical (<= 15%) */
 #battery.critical {
-    color: #ff5555;
+    color: @red;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -155,7 +155,7 @@ window#waybar {
 /* Quando está carregando ou plugado em 100% */
 #battery.charging,
 #battery.plugged {
-    color: #50fa7b;
+    color: @green;
     animation-name: blink;
     animation-duration: 1s; /* Deixei mais suave (1s) para não incomodar quando cheia */
     animation-timing-function: linear;

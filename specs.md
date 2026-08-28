@@ -93,9 +93,23 @@ acabou resetada/resincronizada. Restaurado o acesso via grupo **docker**
 - [ ] Fonte única em todo o sistema
 
 ### Fase 3 — Refatorar Hyprland em módulos
-- [ ] Dividir `hyprland.lua` em `autostart.lua`, `appearance.lua`, `binds.lua`, `window-rules.lua`, `monitor.lua`
-- [ ] Manter comportamento idêntico (só organização)
-- [ ] Validar com `hyprctl reload`
+- [x] Dividir `hyprland.lua` em `autostart.lua`, `appearance.lua`, `binds.lua`, `window-rules.lua`, `monitor.lua`
+- [x] Manter comportamento idêntico (só organização)
+- [x] Validar com `hyprctl reload`
+
+> **Achado importante (Fase 3):** o Hyprland **não expõe `os.getenv`** no ambiente Lua do config
+> (retorna `nil`). Por isso o caminho dos módulos usa **caminho absoluto literal**
+> (`/home/brizotti/dotfiles/hypr/.config/hypr/config/`). Também descobriu-se que o
+> `require` não resolve para o diretório desejado → usa-se **`dofile`** com caminho literal.
+> Módulos: `programs`, `appearance`, `monitor`, `look`, `binds`, `window-rules`.
+> O config modular aplica **59 binds** (idêntico ao original monolítico) e as workspaces
+> funcionam.
+
+### Achado pré-existente (bug do config original)
+Antes da refatoração, o Hyprland aplicava **apenas 3 binds** (config de *fallback* de exemplo),
+não o config real do usuário — o que explicava o "sistema não se comporta como queria" e a
+dificuldade de trocar workspaces. Com o `hyprland.lua` correto aplicando todos os binds, o
+comportamento foi restaurado (59 binds → workspaces funcionando).
 
 ### Fase 4 — Melhorias de UX
 - [ ] Kitty tab bar alinhada às bordas arredondadas

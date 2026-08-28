@@ -179,6 +179,13 @@ _(preencher a cada fase)_
 | `d808cc1` | 2 | Qt mantém Fusion; cursores Bibata instalados |
 | `2b889df` | 4 | zsh: aliases de manutenção `update`/`cleanup`/`cleancache`/`bkp-pacotes` |
 | `f8c5d56` | 4 | kitty: padding 12px, opacidade 0.85, hide_window_decorations |
+| `f32ba9f` | 0 | Checkpoint de reversão (tag, snapshot `/etc` network, bkp swaync, lista de pacotes) |
+| `e0d7678` | A | Hyprland glass: blur forte, bordas, sombras, opacidade de janela |
+| `f525e29` | B | Waybar glass: fundo mantle translúcido + blur, workspaces pill, limpa CSS |
+| `a278c5a` | C | rofi-wayland glass: config.rasi, binds/programs via rofi, pacote Stow `rofi` |
+| `5701bdb` | E | SwayNC: consolida no Stow (`config.jsonc` + `style.css`) |
+| `334c72f` | F | Hyprlock: blur do fundo sincronizado (passes 3, size 8) |
+| `(HEAD)` | G | GTK4: settings.ini versionado (fonte/cursor coerentes) |
 
 ---
 

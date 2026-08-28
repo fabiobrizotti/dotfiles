@@ -154,6 +154,15 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 - [x] Menu e clipboard via rofi (se tornou o launcher padrão)
 - [x] Pacote Stow `rofi` criado e aplicado
 
+> **⚠️ Incidente — rofi 2.0 (compatibilidade de sintaxe):** o config original usava `modi:`
+> (sintaxe 1.x / fork rofi-wayland), mas o binário instalado é **rofi 2.0.0**, que renomeou para
+> **`modes:`** e **ignora silenciosamente `modi:`** — resultando em rofi que não abria corretamente.
+> **Corrigido:** `modi:` → `modes:` no `config.rasi`. Além disso, o **rofi 2.0 usa layer-shell**
+> (abre como *layer surface* na level 3, `namespace: "rofi"`), então **regras de janela**
+> (`window_rule` com `float`/`center`) **NÃO se aplicam** a ele — o dimensionamento/posição é
+> controlado pelo próprio `config.rasi`. Atualize a doc/README de "rofi-wayland" → **rofi 2.0**
+> para evitar reaplicar sintaxe 1.x.
+
 ### Fase E — SwayNC glass
 - [x] Consolido nos dotfiles (`config.jsonc` + `style.css`), pacote Stow `swaync`
 
@@ -166,8 +175,8 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 ### Fase I — Documentação + histórico
 - [x] Commit que registra a reforma glass, decisões de performance e o histórico de commits
 
-> **Pacote `wofi` descomissionado** (fase de fechamento): o launcher real é o **rofi-wayland**;
-> `wofi/` foi removido do stow, do repo e do README (ver histórico Fase K).
+> **Pacote `wofi` descomissionado** (fase de fechamento): o launcher real é o **rofi** (mainline
+> 2.0, não o fork rofi-wayland); `wofi/` foi removido do stow, do repo e do README (ver histórico Fase K).
 
 ---
 
@@ -196,7 +205,7 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 - **QT**: mantido `style=Fusion` (seguro; Kvantum fica como melhoria opcional futura).
 - **ATENÇÃO (upgrade futuro do Hyprland)**: o config usa a **API Lua (`hyprlua`/`hl.*`)**, experimental no 0.56. Ao atualizar o Hyprland, verificar compatibilidade do formato Lua; alternativa é migrar para `hyprlang` clássico se quebrar.
 - **Starship**: o config ativo em `~/.config/starship.toml` **não era o do repo** (o stow do starship nunca foi/caiu — arquivo normal de config default). **Corrigido**: `~/.config/starship.toml` agora é **symlink** para `starship/.config/starship.toml` (prompt customizado em linha dupla, `❯` laranja). Backup do antigo em `/tmp/opencode/starship-bkp/`.
-- **`wofi` descomissionado**: o launcher real é **rofi-wayland**; removi `wofi/` do stow (`PACKAGES`), do repo e do README.
+- **`wofi` descomissionado**: o launcher real é **rofi 2.0** (mainline); removi `wofi/` do stow (`PACKAGES`), do repo e do README.
 - **zshrc**: adicionada a linha que carrega `~/.local/bin/env` (PATH do **uv**, com newline final e guard `[ -f ... ]`).
 - **🔐 SENHAS TEMPORÁRIAS:** `brizotti` e `root` estão com senha `031222` (restaurada via docker/chroot durante incidente). **TROCAR O QUANTO ANTES.**
 

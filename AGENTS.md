@@ -38,7 +38,7 @@ Files in `~/dotfiles/*/.config/...` are the **originals**; `~/.config/<app>` ent
 - Kitty is translucent via window-rule + Hyprland blur.
 
 ## System tuning already applied (do not "fix" blindly)
-- `/etc/systemd/network/20-ethernet.network` has `RequiredForOnline=no` (fixes 2min boot stall; takes effect **after reboot**).
+- `/etc/systemd/network/20-ethernet.network` **and** `20-wlan.network` have `RequiredForOnline=no` (fixes 2min boot stall from `systemd-networkd-wait-online`; user connects over Wi-Fi, so wlan was the real culprit). Backup of wlan file: `/etc/systemd/network/20-wlan.network.bak-20260828-190919`. Effect visible **after reboot**.
 - Journald limited (`SystemMaxUse=100M`). paccache trimmed.
 - `amd-ucode` is installed but CPU is Intel — removable (`sudo pacman -Rns amd-ucode`) but left by choice.
 

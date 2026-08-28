@@ -94,10 +94,10 @@ acabou resetada/resincronizada. Restaurado o acesso via grupo **docker**
 
 ### Fase 2 — Unificação visual
 - [x] Waybar: remover cores Dracula, padronizar Nerd Font, remover `macchiato.css`
-- [ ] GTK: fonte JetBrains Nerd, cursor Bibata, `gtk.css` na paleta
-- [ ] Qt: tema escuro coeso via kvantum/qt6ct (Catppuccin para Qt)
-- [ ] Cursores: instalar, setar `Indexed`, padronizar em gsettings+GTK+Qt
-- [ ] Fonte única em todo o sistema
+- [x] GTK: fonte JetBrains Nerd, cursor Bibata, `gtk.css` na paleta
+- [x] Qt: tema escuro coeso via qt6ct (`Fusion` + Papirus-Dark + JetBrains Nerd) — **decisão: manter `Fusion`** (seguro; Kvantum exige instalar tema, deixado como melhoria opcional futura para não quebrar apps Qt)
+- [x] Cursores: instalado, `Indexed`/Inherits corrigido, padronizado em env+GTK (gsettings aponta Bibata)
+- [x] Fonte única em todo o sistema (JetBrainsMono Nerd Font — Hyprland/Gtk/Qt)
 
 ### Fase 3 — Refatorar Hyprland em módulos
 - [x] Dividir `hyprland.lua` em `autostart.lua`, `appearance.lua`, `binds.lua`, `window-rules.lua`, `monitor.lua`

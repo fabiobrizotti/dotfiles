@@ -255,7 +255,7 @@ _(preencher a cada fase)_
 | `153d4c8` | K | Descomissiona wofi (rofi é o launcher), remove do stow e atualiza README+AGENTS |
 | `020c660` | docs | Documenta load absoluto do hypr/config e remove wofi dos PACKAGES no AGENTS |
 | `47bf5dc` | fix | Reverte launcher: rofi → **wofi** (rofi 2.0 quebra parse de tema); restaura `wofi/`, atualiza programs/stow/README/AGENTS |
-| `4` | waybar | Altura + UX: barra 22px → **36px**, fontes proporcionais (base 13px), pills dos workspaces menores com respiro (raio 10/12, padding 0-8px, margin 2px) e transição suave de cor na troca de workspace |
+| `63bf80c` | waybar | Altura + UX: barra 22px → **36px**, fontes proporcionais (base 13px), pills dos workspaces menores com respiro (raio 10/12, padding 0-8px, margin 2px) e transição suave de cor na troca de workspace |
 
 ---
 

@@ -134,6 +134,43 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 
 ---
 
+## 🪟 Reforma GLASS (visual "vidro" leve e bonito)
+
+> **Sobre a numeração:** as fases de "glass" foram enumeradas durante o desenvolvimento de forma
+> **irregular** — **não existem commits "Fase D" nem "Fase H"** (a revisão completa do histórico
+> confirma que D foi pulada entre C→E e H entre G→I). As referências **A–I** usam a numeração
+> real dos commits e **não serão renumeradas** para não quebrar o histórico/tags.
+
+### Fase A — Hyprland glass
+- [x] Blur forte (size 8, passes 3, xray), bordas fino, sombras, opacidade de janela (0.97/0.93)
+- [x] Curvas de animação e cantos arredondados (rounding 12)
+
+### Fase B — Waybar glass
+- [x] Fundo mantle translúcido com blur (efeito vidro)
+- [x] Workspaces em pill, limpeza do CSS (remove roxo antigo)
+
+### Fase C — rofi-wayland glass
+- [x] `config.rasi` Macchiato/laranja translúcido
+- [x] Menu e clipboard via rofi (se tornou o launcher padrão)
+- [x] Pacote Stow `rofi` criado e aplicado
+
+### Fase E — SwayNC glass
+- [x] Consolido nos dotfiles (`config.jsonc` + `style.css`), pacote Stow `swaync`
+
+### Fase F — Hyprlock glass
+- [x] Blur do fundo sincronizado (passes 3, size 8)
+
+### Fase G — GTK4 settings
+- [x] `gtk-4.0/settings.ini` versionado (fonte JetBrains Nerd + cursor Bibata coerentes)
+
+### Fase I — Documentação + histórico
+- [x] Commit que registra a reforma glass, decisões de performance e o histórico de commits
+
+> **Pacote `wofi` descomissionado** (fase de fechamento): o launcher real é o **rofi-wayland**;
+> `wofi/` foi removido do stow, do repo e do README (ver histórico Fase K).
+
+---
+
 ## 🎨 Decisões de design
 
 **Paleta unificada:** Catppuccin Macchiato (referência: cores em `waybar/style.css` topo + `macchiato.css`).
@@ -156,8 +193,11 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 - **Waybar**: fundo roxo escuro `#22062b` + texto azul **mantidos** (escolha explícita do usuário; não tratado como inconsistência).
 - **`dotpush`**: **mantido** com `git push` (usuário gerencia push manualmente; regra de não-push no `dev` vale para as execuções de sessão, não para o alias).
 - **`gtk-4.0/` (vazio)**: removido do pacote Stow — o `~/.config/gtk-4.0` real é gerado por `nwg-look`/adw-gtk3 (symlinks externos), não pelos dotfiles.
-- **Qt**: mantido `style=Fusion` (seguro; Kvantum fica como melhoria opcional futura).
+- **QT**: mantido `style=Fusion` (seguro; Kvantum fica como melhoria opcional futura).
 - **ATENÇÃO (upgrade futuro do Hyprland)**: o config usa a **API Lua (`hyprlua`/`hl.*`)**, experimental no 0.56. Ao atualizar o Hyprland, verificar compatibilidade do formato Lua; alternativa é migrar para `hyprlang` clássico se quebrar.
+- **Starship**: o config ativo em `~/.config/starship.toml` **não era o do repo** (o stow do starship nunca foi/caiu — arquivo normal de config default). **Corrigido**: `~/.config/starship.toml` agora é **symlink** para `starship/.config/starship.toml` (prompt customizado em linha dupla, `❯` laranja). Backup do antigo em `/tmp/opencode/starship-bkp/`.
+- **`wofi` descomissionado**: o launcher real é **rofi-wayland**; removi `wofi/` do stow (`PACKAGES`), do repo e do README.
+- **zshrc**: adicionada a linha que carrega `~/.local/bin/env` (PATH do **uv**, com newline final e guard `[ -f ... ]`).
 - **🔐 SENHAS TEMPORÁRIAS:** `brizotti` e `root` estão com senha `031222` (restaurada via docker/chroot durante incidente). **TROCAR O QUANTO ANTES.**
 
 ---
@@ -185,7 +225,11 @@ _(preencher a cada fase)_
 | `a278c5a` | C | rofi-wayland glass: config.rasi, binds/programs via rofi, pacote Stow `rofi` |
 | `5701bdb` | E | SwayNC: consolida no Stow (`config.jsonc` + `style.css`) |
 | `334c72f` | F | Hyprlock: blur do fundo sincronizado (passes 3, size 8) |
-| `(HEAD)` | G | GTK4: settings.ini versionado (fonte/cursor coerentes) |
+| `61811ca` | G | GTK4: settings.ini versionado (fonte/cursor coerentes) |
+| `a81c48a` | I | Documenta reforma glass + performance e histórico de commits |
+| `f2aef39` | J | Declara PATH do uv no zshrc + adiciona AGENTS.md (contexto da sessão) |
+| `153d4c8` | K | Descomissiona wofi (rofi é o launcher), remove do stow e atualiza README+AGENTS |
+| `020c660` | docs | Documenta load absoluto do hypr/config e remove wofi dos PACKAGES no AGENTS |
 
 ---
 

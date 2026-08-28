@@ -36,11 +36,13 @@
 }
 
 window#waybar {
-  /* Fundo "glass": mantle translúcido — o Hyprland blura o que está por trás.
-     (blur já habilitado em look.lua; basta alfa < 1 nesta superfície) */
+  /* Barra "pill" flutuante: fundo mantle translúcido — o Hyprland blura o que
+     está por trás (blur em look.lua). Margens de 8px via config.jsonc desprendem
+     a barra das bordas; cantos arredondados (raio 14, ecoa o das janelas).
+     Borda em volta toda substitui a antiga border-bottom full-width. */
   background-color: rgba(30, 32, 48, 0.55);
-  border-bottom: 1px solid alpha(@orange, 0.45);
-  border-radius: 0;
+  border: 1px solid alpha(@orange, 0.4);
+  border-radius: 14px;
   color: @sapphire;
   padding: 6px 12px;
   min-height: 36px;

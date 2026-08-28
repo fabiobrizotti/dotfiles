@@ -251,6 +251,15 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 - Clean code: bloco `#battery` **deduplicado** (era definido 2x) e comentado por estado.
 - **Validação:** restart do waybar limpo (CSS parseado sem erro, barra 1920×36).
 
+### Fase C — Waybar: barra flutuante "pill" ✅
+- `config.jsonc`: `margin-top/left/right: 8px` → barra desprendida das bordas
+  (largura medida: **1904px** = 1920 − 16 de margens).
+- `style.css`: `border-radius: 14px` (ecoa o raio das janelas) + `border: 1px
+  alpha(@orange,0.4)` em toda a volta (substituiu a `border-bottom` full-width).
+- Traspassado de profundidade: canto transparente deixa ver wallpaper (sem blur
+  ali, esperado); mouse passa por cima das margens (layer-shell respeita bounds).
+- **Validação:** restart limpo, CSS ok, barra 1904×36.
+
 ### Pendências adiadas (registradas — próxima rodada)
 - **◻️ D** wofi: janela centralizada + transições/scrollbar
 - **◻️ E** swaync: accent bar laranja + vida no painel (widget-dnd/switch/estado vazio)
@@ -293,6 +302,7 @@ _(preencher a cada fase)_
 | `63bf80c` | waybar | Altura + UX: barra 22px → **36px**, fontes proporcionais (base 13px), pills dos workspaces menores com respiro (raio 10/12, padding 0-8px, margin 2px) e transição suave de cor na troca de workspace |
 | Fase A | hypr | Animações médias: ativa fadeIn/Out/Switch/Shadow/Dim, windowsIn/Out (`slide`), windowsMove, borderangle — 9 folhas `enabled: 1`, binds 49 intactos |
 | Fase B | waybar | Micro-polimento: tooltip glass, hover de pill elevado, #mpris com borda verde + elevação, transições padronizadas (0.3s), dedupe do #battery |
+| Fase C | waybar | Barra flutuante "pill": margens 8px + border-radius 14px + borda completa sutil (largura medida 1904px) |
 
 ---
 

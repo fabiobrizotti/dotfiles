@@ -63,6 +63,7 @@ window#waybar {
 #custom-icon {
   font-size: 16px;
   padding-right: 5px;
+  transition: all 0.3s ease; /* consistente com o timing geral de 0.3s */
 }
 
 #window {
@@ -87,8 +88,9 @@ window#waybar {
               border-radius 0.3s ease;
 }
 
+/* Hover: "levanta" a pill (fundo mais presente) para indicar que é clicável */
 #workspaces button:hover {
-  background: alpha(@surface1, 0.55);
+  background: alpha(@surface1, 0.7);
 }
 
 #workspaces button.urgent {
@@ -103,6 +105,7 @@ window#waybar {
 
 #tray {
   color: @orange;
+  transition: all 0.3s ease;
 }
 
 #clock {
@@ -114,6 +117,7 @@ window#waybar {
   color: @yellow;
 }
 
+/* BATERIA */
 #battery {
   color: @orange;
   font-weight: bold;
@@ -124,50 +128,44 @@ window#waybar {
   color: @yellow;
 }
 
-/* Aumenta ligeiramente o tamanho apenas do ícone da bateria */
+/* Ícone da bateria levemente maior para equilíbrio de peso visual */
 #battery span,
 #battery .icon {
   font-size: 14px;
 }
 
-/* BATERIA */
-/* Estilo Padrão */
-#battery {
-    color: @orange;
-}
-
-/* Quando entra em warning (<= 30%) */
+/* Estado: warning (<= 30%) */
 #battery.warning {
-    color: @yellow;
+  color: @yellow;
 }
 
-/* Quando entra em critical (<= 15%) */
+/* Estado: critical (<= 15%) — pisca rápido para chamar atenção */
 #battery.critical {
-    color: @red;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  color: @red;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
-/* Quando está carregando ou plugado em 100% */
+/* Carregando ou plugada em 100% — piscar suave (1s, menos intrusivo) */
 #battery.charging,
 #battery.plugged {
-    color: @green;
-    animation-name: blink;
-    animation-duration: 1s; /* Deixei mais suave (1s) para não incomodar quando cheia */
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  color: @green;
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
-/* Define o efeito de piscar (fade in / fade out) */
+/* Efeito de piscar = fade in/out da cor, suavizando o aviso */
 @keyframes blink {
-    to {
-        color: #ffffff;
-        opacity: 0.5;
-    }
+  to {
+    color: #ffffff;
+    opacity: 0.5;
+  }
 }
 
 
@@ -200,20 +198,25 @@ window#waybar {
   color: @yellow;
 }
 
-/* Módulo de Mídia / Spotify */
+/* Módulo de Mídia / Spotify — pill verde (positivo = tocando) com elevação sutil
+   (border + box-shadow. transform/scale não são aceitos pelo parser GTK do waybar) */
 #mpris {
   padding: 0 12px;
   color: @green;
   font-weight: bold;
   background-color: alpha(@surface0, 0.5);
+  border: 1px solid alpha(@green, 0.25);
   border-radius: 8px;
   margin: 2px 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
   transition: all 0.3s ease;
 }
 
 #mpris.paused {
   color: @subtext0;
   background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
 }
 #network,
 #bluetooth {
@@ -232,4 +235,17 @@ window#waybar {
 #bluetooth.disabled,
 #bluetooth.off {
   color: @subtext0;
+}
+
+/* TOOLTIP — mesma linguagem "glass" dos painéis: alfa alto (leitura), raio 10,
+   borda laranja sutil e elevação para flutuar sobre a barra */
+tooltip {
+  background: rgba(24, 25, 38, 0.95);
+  border: 1px solid alpha(@orange, 0.4);
+  border-radius: 10px;
+  color: @text;
+}
+
+tooltip label {
+  color: @text;
 }

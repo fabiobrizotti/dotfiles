@@ -242,6 +242,15 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 - **Validação:** `luac -p` ok, `hyprctl reload` → `ok`, **9 folhas `enabled: 1`**
   (windowsIn/Out slide aplicado), binds **49** intactos.
 
+### Fase B — Waybar: micro-polimento ✅
+- Tooltip com linguagem glass (raio 10, borda laranja alpha 0.4, fundo crust 0.95).
+- Hover das pills elevado (`surface1` 0.55 → **0.7**) — affordance de "clicável".
+- `#mpris`: pill com borda verde + `box-shadow` sutil (elevação); estado `paused`
+  zera borda/sombra. `transform/scale` segue bloqueado pelo parser GTK (mantido).
+- `transition: all 0.3s` agora consistente também em `#custom-icon` e `#tray`.
+- Clean code: bloco `#battery` **deduplicado** (era definido 2x) e comentado por estado.
+- **Validação:** restart do waybar limpo (CSS parseado sem erro, barra 1920×36).
+
 ### Pendências adiadas (registradas — próxima rodada)
 - **◻️ D** wofi: janela centralizada + transições/scrollbar
 - **◻️ E** swaync: accent bar laranja + vida no painel (widget-dnd/switch/estado vazio)
@@ -283,6 +292,7 @@ _(preencher a cada fase)_
 | `47bf5dc` | fix | Reverte launcher: rofi → **wofi** (rofi 2.0 quebra parse de tema); restaura `wofi/`, atualiza programs/stow/README/AGENTS |
 | `63bf80c` | waybar | Altura + UX: barra 22px → **36px**, fontes proporcionais (base 13px), pills dos workspaces menores com respiro (raio 10/12, padding 0-8px, margin 2px) e transição suave de cor na troca de workspace |
 | Fase A | hypr | Animações médias: ativa fadeIn/Out/Switch/Shadow/Dim, windowsIn/Out (`slide`), windowsMove, borderangle — 9 folhas `enabled: 1`, binds 49 intactos |
+| Fase B | waybar | Micro-polimento: tooltip glass, hover de pill elevado, #mpris com borda verde + elevação, transições padronizadas (0.3s), dedupe do #battery |
 
 ---
 

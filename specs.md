@@ -226,6 +226,32 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 
 ---
 
+## 🎬 Fase Animações — Hyprland + Waybar (2026-08-28)
+
+> **Objetivo:** dar vida ao WM e fechar o design system (raio, alfa, elevação,
+> semântica de cor) com micro-interações modernas. Nível de animação: **médio**.
+
+### Fase A — Hyprland: animações ✅
+- `look.lua`: ativadas as folhas que estavam em default/off usando as **curvas já
+  definidas** (easeOutQuint, easeInOutCubic, almostLinear):
+  - `fadeIn/fadeOut/fadeSwitch/fadeShadow/fadeDim` (fades de contexto)
+  - `windowsIn/Out` com `style = "slide"` (entrada/saída que deslizam)
+  - `windowsMove` (arrastar fluido, almostLinear)
+  - `borderangle` (gradiente laranja→amarelo gira ao trocar foco)
+- Comentários pt-BR por folha ("o que influencia"). Bloco reorganizado por concern.
+- **Validação:** `luac -p` ok, `hyprctl reload` → `ok`, **9 folhas `enabled: 1`**
+  (windowsIn/Out slide aplicado), binds **49** intactos.
+
+### Pendências adiadas (registradas — próxima rodada)
+- **◻️ D** wofi: janela centralizada + transições/scrollbar
+- **◻️ E** swaync: accent bar laranja + vida no painel (widget-dnd/switch/estado vazio)
+- **◻️ F** kitty: `cursor_trail`, `background_tint`, cores de `mark`
+- **◻️ G** hyprlock: `fade_in` de entrada (verificar suporte na versão)
+- **◻️ Opcional futuro:** `hyprland-plugins` (hyprbars), `matugen`/`wallust`
+  (paleta dinâmica do wallpaper), script externo p/ borda girando continuamente.
+
+---
+
 ## 📝 Histórico de commits / mudanças
 
 _(preencher a cada fase)_
@@ -256,6 +282,7 @@ _(preencher a cada fase)_
 | `020c660` | docs | Documenta load absoluto do hypr/config e remove wofi dos PACKAGES no AGENTS |
 | `47bf5dc` | fix | Reverte launcher: rofi → **wofi** (rofi 2.0 quebra parse de tema); restaura `wofi/`, atualiza programs/stow/README/AGENTS |
 | `63bf80c` | waybar | Altura + UX: barra 22px → **36px**, fontes proporcionais (base 13px), pills dos workspaces menores com respiro (raio 10/12, padding 0-8px, margin 2px) e transição suave de cor na troca de workspace |
+| Fase A | hypr | Animações médias: ativa fadeIn/Out/Switch/Shadow/Dim, windowsIn/Out (`slide`), windowsMove, borderangle — 9 folhas `enabled: 1`, binds 49 intactos |
 
 ---
 

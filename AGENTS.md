@@ -7,6 +7,7 @@ Dotfiles for **Arch + Hyprland (Lua config)** + Waybar, Catppuccin Macchiato + O
 
 ## Critical: live symlink setup
 Files in `~/dotfiles/*/.config/...` are the **originals**; `~/.config/<app>` entries are **symlinks** into this repo via GNU Stow. **Editing here changes the running system immediately.** Always validate after editing the config of a running app.
+- Exception: `hypr/.config/hypr/config/*.lua` modules load via **absolute path** into the repo and are **not** stowed/symlinked (see Hyprland quirks below). `~/.config/hypr/config/` intentionally does not exist.
 
 ## Git workflow (hard rules)
 - Work only on branch **`dev`**. **Never push/merge to `main`** without explicit user approval.
@@ -22,7 +23,7 @@ Files in `~/dotfiles/*/.config/...` are the **originals**; `~/.config/<app>` ent
 ## Validation (required after Hyprland config changes)
 - `luac -p <file>` for syntax, then `hyprctl reload` (expect `ok`) and `hyprctl getoption general:blur:size` / `passes` to confirm.
 - Valid state = **59 active binds** (`hyprctl binds | grep -c`), workspaces switching, processes running: `waybar hyprpaper swaync swayosd-server hypridle`.
-- Stow packages: `PACKAGES=(gtk hypr kitty lazygit qt rofi starship waybar wofi zsh)`. Re-apply a package after removing an original dir: `stow --restow --target="$HOME" <pkg>`.
+- Stow packages: `PACKAGES=(gtk hypr kitty lazygit qt rofi starship waybar zsh)`. Re-apply a package after removing an original dir: `stow --restow --target="$HOME" <pkg>`.
 
 ## Security / root access (sensitive)
 - **Temporary passwords `031222` for both `brizotti` and `root`** (set during a sudo-incident recovery). **User must change them ASAP** — remind/flag, never reuse.

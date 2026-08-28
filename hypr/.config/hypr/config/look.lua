@@ -18,21 +18,23 @@ hl.config({
     },
 
     decoration = {
-        rounding         = 10,
+        rounding         = 12,
         rounding_power   = 2,
-        active_opacity   = 1.0,
-        inactive_opacity = 1.0,
+        active_opacity   = 0.97,
+        inactive_opacity = 0.93,
         shadow           = {
             enabled      = true,
-            range        = 4,
+            range        = 6,
             render_power = 3,
-            color        = 0xee1a1a1a,
+            color        = 0xcc0a0a0a,
         },
         blur             = {
-            enabled  = true,
-            size     = 6,
-            passes   = 2,
-            vibrancy = 0.1696,
+            enabled             = true,
+            size                = 8,
+            passes              = 3,
+            vibrancy            = 0.2,
+            xray                = true,
+            new_optimizations   = true,
         },
     },
 

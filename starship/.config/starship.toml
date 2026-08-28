@@ -63,7 +63,7 @@ format = "via [$symbol($version )]($style)"
 [python]
 symbol = " "
 style = "bold #eed49f"
-format = "via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)"
+format = "via [${symbol}${pyenv_prefix}(${version} )($virtualenv)]($style)"
 
 [rust]
 symbol = "󱘗 "

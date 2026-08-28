@@ -1,0 +1,14 @@
+droidcam-debug
+gcovr
+go
+lazydocker-bin-debug
+localsend-debug
+mbedtls
+mod_wsgi-debug
+pgadmin4-desktop-debug
+pgadmin4-server-debug
+python-build
+python-clickgen
+python-hatchling
+python-installer
+ucl-debug

@@ -21,7 +21,7 @@
 | :--- | :--- | :--- |
 | **Window Manager** | [Hyprland](https://hyprland.org/) | Configuração modular em Lua (`hyprland.lua`), bordas em gradiente laranja/amarelo, cantos arredondados (10px) e regras flutuantes. |
 | **Barra Superior** | [Waybar](https://github.com/Alexays/Waybar) | Paleta Catppuccin Macchiato + Laranja, workspaces em algarismos romanos (I a X), animações de bateria e integração com MPRIS. |
-| **Launcher de Apps** | [rofi](https://github.com/lbonn/rofi) (rofi-wayland) | Janela central translúcida (glass), ícones e destaque em laranja. |
+| **Launcher de Apps** | [Wofi](https://hg.sr.ht/~scoopta/wofi) | Janela central translúcida (glass), ícones e destaque em laranja. |
 | **Terminal** | [Kitty](https://sw.kovidgoyal.net/kitty/) | JetBrainsMono Nerd Font, opacidade 0.85, padding interno de 12px e paleta sem azul (tons quentes). |
 | **Shell & Prompt** | [Zsh](https://www.zsh.org/) + [Starship](https://starship.rs/) | Prompt customizado com status Git, linguagens e plugins (`autosuggestions`, `syntax-highlighting`, `zoxide`, `eza`, `fzf`). |
 | **Lockscreen & Idle** | [Hyprlock](https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/) & [Hypridle](https://wiki.hyprland.org/Hypr-Ecosystem/hypridle/) | Bloqueio com blur no wallpaper padrão, relógio gigante e regras automáticas de suspensão. |
@@ -35,7 +35,7 @@
 | Atalho | Ação / Comando |
 | :--- | :--- |
 | <kbd>SUPER</kbd> + <kbd>T</kbd> | Abre o Terminal (**Kitty**) |
-| <kbd>SUPER</kbd> + <kbd>R</kbd> | Abre o Menu de Aplicativos (**rofi**) |
+| <kbd>SUPER</kbd> + <kbd>R</kbd> | Abre o Menu de Aplicativos (**wofi**) |
 | <kbd>SUPER</kbd> + <kbd>B</kbd> | Abre o Navegador Web (**Firefox**) |
 | <kbd>SUPER</kbd> + <kbd>E</kbd> | Gerenciador de Arquivos (**Nemo**) |
 | <kbd>SUPER</kbd> + <kbd>N</kbd> | Gerenciador de Wi-Fi Flutuante (**Impala / iwd**) |
@@ -57,8 +57,8 @@
 ├── kitty/        # kitty.conf com paleta Macchiato + Laranja e fontes
 ├── lazygit/      # config.yml com tema e lazygit integrado
 ├── qt/           # Configurações do qt5ct e qt6ct (estilo Fusion / Papirus)
-├── rofi/         # config.rasi do launcher rofi-wayland (tema glass)
 ├── starship/     # starship.toml com prompt customizado e status Git
 ├── swaync/       # Configurações e estilos do centro de notificações SwayNC
 ├── waybar/       # config.jsonc e estilos CSS modularizados
+├── wofi/         # config + style.css do launcher (tema glass)
 └── zsh/          # .zshrc com aliases modernos (eza, bat, zoxide, dotpush)

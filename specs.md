@@ -175,8 +175,7 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 ### Fase I — Documentação + histórico
 - [x] Commit que registra a reforma glass, decisões de performance e o histórico de commits
 
-> **Pacote `wofi` descomissionado** (fase de fechamento): o launcher real é o **rofi** (mainline
-> 2.0, não o fork rofi-wayland); `wofi/` foi removido do stow, do repo e do README (ver histórico Fase K).
+> **Vela de retorno ao `wofi`** (decisão pós-Fase K): o rofi 2.0 mainline (instalado na máquina) tem um **parser de tema reescrito** que rejeita parte relevante da sintaxe `.rasi` 1.x/rofi-wayland (`matching`, refs `@var`, `border solid`, `alpha()`, `rgba` decimal) — o launcher abria com "Error while parsing theme" apesar de `modes:` correto. Para evitar migrar todo o bloco de tema e a incerteza de `window_rule` (rofi 2.0 é layer-shell), **voltei para o `wofi`** (que sempre funcionou e usa `config` + `style.css`, sem parser problemático). Detalhes no histórico abaixo.
 
 ---
 
@@ -205,7 +204,7 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 - **QT**: mantido `style=Fusion` (seguro; Kvantum fica como melhoria opcional futura).
 - **ATENÇÃO (upgrade futuro do Hyprland)**: o config usa a **API Lua (`hyprlua`/`hl.*`)**, experimental no 0.56. Ao atualizar o Hyprland, verificar compatibilidade do formato Lua; alternativa é migrar para `hyprlang` clássico se quebrar.
 - **Starship**: o config ativo em `~/.config/starship.toml` **não era o do repo** (o stow do starship nunca foi/caiu — arquivo normal de config default). **Corrigido**: `~/.config/starship.toml` agora é **symlink** para `starship/.config/starship.toml` (prompt customizado em linha dupla, `❯` laranja). Backup do antigo em `/tmp/opencode/starship-bkp/`.
-- **`wofi` descomissionado**: o launcher real é **rofi 2.0** (mainline); removi `wofi/` do stow (`PACKAGES`), do repo e do README.
+- **Launcher = `wofi` (revivido)**: o rofi 2.0 mainline quebra o parse do tema `.rasi` legado. **Revertido** do rofi de volta para o **wofi**: `wofi/` restaurado no stow (`PACKAGES`), repo e README; `menu`/`dmenu` em `programs.lua` apontam para `wofi`; pacote `rofi/` removido do stow e do repo.
 - **zshrc**: adicionada a linha que carrega `~/.local/bin/env` (PATH do **uv**, com newline final e guard `[ -f ... ]`).
 - **🔐 SENHAS TEMPORÁRIAS:** `brizotti` e `root` estão com senha `031222` (restaurada via docker/chroot durante incidente). **TROCAR O QUANTO ANTES.**
 
@@ -239,6 +238,7 @@ _(preencher a cada fase)_
 | `f2aef39` | J | Declara PATH do uv no zshrc + adiciona AGENTS.md (contexto da sessão) |
 | `153d4c8` | K | Descomissiona wofi (rofi é o launcher), remove do stow e atualiza README+AGENTS |
 | `020c660` | docs | Documenta load absoluto do hypr/config e remove wofi dos PACKAGES no AGENTS |
+| `3408fcd` | fix | Reverte launcher: rofi → **wofi** (rofi 2.0 quebra parse de tema); restaura `wofi/`, atualiza programs/stow/README/AGENTS |
 
 ---
 

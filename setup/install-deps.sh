@@ -14,12 +14,12 @@ set -euo pipefail
 is_installed() { pacman -Q "$1" >/dev/null 2>&1; }
 
 # Pacotes do repositório oficial (pacman)
-OFFICIAL=(
-    bibata-cursor-theme   # cursor Bibata-Modern-Classic (Hyprland já referencia)
-)
+OFFICIAL=()
 
 # Pacotes da AUR (via yay)
-AUR=()
+AUR=(
+    bibata-cursor-theme   # cursor Bibata-Modern-Classic (Hyprland já referencia)
+)
 
 check() {
     local missing=0

@@ -230,6 +230,10 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 
 > **Objetivo:** dar vida ao WM e fechar o design system (raio, alfa, elevação,
 > semântica de cor) com micro-interações modernas. Nível de animação: **médio**.
+>
+> **Nota de numeração:** as "Etapas A/B/C + encerramento" desta seção são uma
+> série nova e **independente** da numeração "glass" A–I acima (as antigas
+> Fases D e H de glass realmente não existem — ver nota da seção GLASS).
 
 ### Fase A — Hyprland: animações ✅
 - `look.lua`: ativadas as folhas que estavam em default/off usando as **curvas já
@@ -300,9 +304,9 @@ _(preencher a cada fase)_
 | `020c660` | docs | Documenta load absoluto do hypr/config e remove wofi dos PACKAGES no AGENTS |
 | `47bf5dc` | fix | Reverte launcher: rofi → **wofi** (rofi 2.0 quebra parse de tema); restaura `wofi/`, atualiza programs/stow/README/AGENTS |
 | `63bf80c` | waybar | Altura + UX: barra 22px → **36px**, fontes proporcionais (base 13px), pills dos workspaces menores com respiro (raio 10/12, padding 0-8px, margin 2px) e transição suave de cor na troca de workspace |
-| Fase A | hypr | Animações médias: ativa fadeIn/Out/Switch/Shadow/Dim, windowsIn/Out (`slide`), windowsMove, borderangle — 9 folhas `enabled: 1`, binds 49 intactos |
-| Fase B | waybar | Micro-polimento: tooltip glass, hover de pill elevado, #mpris com borda verde + elevação, transições padronizadas (0.3s), dedupe do #battery |
-| Fase C | waybar | Barra flutuante "pill": margens 8px + border-radius 14px + borda completa sutil (largura medida 1904px) |
+| `c018fd6` | A | Animações médias: ativa fadeIn/Out/Switch/Shadow/Dim, windowsIn/Out (`slide`), windowsMove, borderangle — 9 folhas `enabled: 1`, binds 49 intactos |
+| `10d68d6` | B | Waybar micro-polimento: tooltip glass, hover de pill elevado, #mpris com borda verde + elevação, transições padronizadas (0.3s), dedupe do #battery |
+| `3de1e69` | C | Waybar barra flutuante "pill": margens 8px + border-radius 14px + borda completa sutil (largura medida 1904px) |
 
 ---
 

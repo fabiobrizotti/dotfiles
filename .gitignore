@@ -23,3 +23,7 @@ history.zsh
 # Artefatos do sistema que não fazem parte da configuração
 .cache/
 session/
+
+# Graphify / GSD — artefatos gerados (grafo da sessão, caminhos locais)
+.planning/
+graphify-out/

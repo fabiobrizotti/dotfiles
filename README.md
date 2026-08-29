@@ -56,6 +56,7 @@
 ├── hypr/         # Configurações do Hyprland, Hyprpaper, Hyprlock e Hypridle
 ├── kitty/        # kitty.conf com paleta Macchiato + Laranja e fontes
 ├── lazygit/      # config.yml com tema e lazygit integrado
+├── localbin/     # Scripts locais (temp-watch.sh — monitor térmico + alertas SwayNC)
 ├── qt/           # Configurações do qt5ct e qt6ct (estilo Fusion / Papirus)
 ├── starship/     # starship.toml com prompt customizado e status Git
 ├── swaync/       # Configurações e estilos do centro de notificações SwayNC

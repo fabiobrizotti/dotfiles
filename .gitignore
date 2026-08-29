@@ -27,3 +27,10 @@ session/
 # Graphify / GSD — artefatos gerados (grafo da sessão, caminhos locais)
 .planning/
 graphify-out/
+
+# Exceção: o pacote Stow 'localbin' versiona scripts em localbin/.local/bin
+# (o padrão '.local/' acima ignora dados de apps; este é o nosso próprio script)
+!localbin/
+!localbin/.local/
+!localbin/.local/bin/
+!localbin/.local/bin/temp-watch.sh

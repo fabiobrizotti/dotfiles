@@ -23,7 +23,8 @@ Files in `~/dotfiles/*/.config/...` are the **originals**; `~/.config/<app>` ent
 ## Validation (required after Hyprland config changes)
 - `luac -p <file>` for syntax, then `hyprctl reload` (expect `ok`) and `hyprctl getoption decoration:blur:size` / `decoration:blur:passes` to confirm.
 - Valid state = **~49 active binds** (`hyprctl binds | grep -c '^bind$'`), workspaces switching, processes running: `waybar hyprpaper swaync swayosd-server hypridle`.
-- Stow packages: `PACKAGES=(gtk hypr kitty lazygit qt wofi starship waybar zsh)`. Re-apply a package after removing an original dir: `stow --restow --target="$HOME" <pkg>`.
+- Stow packages: `PACKAGES=(gtk hypr kitty lazygit localbin qt wofi starship waybar zsh)`. Re-apply a package after removing an original dir: `stow --restow --target="$HOME" <pkg>`.
+- Thermal: `temp-watch.sh` (pacote `localbin`) monitora a CPU no autostart do Hyprland; alerta via SwayNC a 85°C e crítico a 90°C. Daemons: `thermald` + `auto-cpufreq` (Trilha A; sem PWM/fancontrol neste laptop).
 
 ## Security / root access (sensitive)
 - **Temporary passwords `031222` for both `brizotti` and `root`** (set during a sudo-incident recovery). **User must change them ASAP** — remind/flag, never reuse.

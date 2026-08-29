@@ -293,7 +293,7 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 ### Daemons instalados/ativos
 | Pacote | Origem | Estado | Validação |
 |--------|--------|--------|-----------|
-| `thermald` (2.5.12) | pacman | active (`--adaptive`) | `systemctl is-active thermald` |
+| `thermald` (2.5.12) | pacman | active (`--ignore-default-control`, via drop-in) | `systemctl is-active thermald` |
 | `auto-cpufreq` (3.1.0) | AUR/yay | active (daemon) | `auto-cpufreq --stats` |
 
 Instalados manualmente na sessão; registrados em `setup/install-deps.sh` / `bkp-pacotes.sh`.
@@ -321,6 +321,47 @@ Instalados manualmente na sessão; registrados em `setup/install-deps.sh` / `bkp
 
 ### 🔐 Pedência de segurança (herdada)
 - **TROCAR AS SENHAS TEMPORÁRIAS `031222`** (brizotti e root) o quanto antes.
+
+### Config custom do thermald → `thermal-conf.xml` + drop-in systemd (2026-08-28)
+> **Gap fechado:** os trip points default do `thermal_zone1` (x86_pkg_temp) ficavam em
+> **-274°C (desativados)** → o thermald **não throttlava pela temperatura dos núcleos**;
+> a proteção só vinha do `auto-cpufreq` + sensor ACPI da placa (acpitz @87°C).
+
+**Arquivos (versionados no repo p/ reprodutibilidade, instalados como root):**
+- `setup/thermald-thermal-conf.xml` → `/etc/thermald/thermal-conf.xml`
+- `setup/thermald-systemd-dropin.conf` → `/etc/systemd/system/thermald.service.d/override.conf`
+
+**Achados empíricos (validação sob carga `yes`) que guiaram a config:**
+1. **`--adaptive` ignora o XML** (man8: "uses DPTF adaptive tables ... ignores xml"), mesmo sem
+   devices DPTF nesta máquina → trocado para **`--ignore-default-control`** via drop-in
+   ("strictly follow thermal-conf.xml"). Sem isso, o poll só avaliava o trip de maior
+   temperatura e **não agia em 80°C** (a temp subiu a 90°C sem throttlar o cdev).
+2. **2 trips passive para o MESMO cdev Processor (sem TargetState) colapsam** pro de maior
+   temperatura → adotado **1 trip passive + PID** (o padrão documentado, Example 4 da man5).
+3. **PID validado:** set point **80°C**, `kp=0.001` → resposta proporcional confirmada no
+   journal: `Set : 80000, 85000, 8, 5, 10` (85°C→state 5), 82°C→state 2, <80°C→state 0;
+   throttle máximo (state 10) a ~90°C. O `cur_state` dos cdevs Processor sobe conforme a temp
+   passa de 80°C (monitorado em `cooling_device5..8`).
+
+**Config efetiva (resumo):**
+- `<ThermalZone Type="x86_pkg_temp">` + 1 TripPoint passive a **80000** (`type passive`,
+  `SEQUENTIAL`, `<CoolingDevice><type>Processor</type>`).
+- `<CoolingDevices><CoolingDevice><Type>Processor</Type><PidControl><kp>0.001</kp>...`.
+
+**Como reinstalar/validar:**
+```bash
+sudo mkdir -p /etc/systemd/system/thermald.service.d
+sudo cp setup/thermald-thermal-conf.xml /etc/thermald/thermal-conf.xml
+sudo cp setup/thermald-systemd-dropin.conf /etc/systemd/system/thermald.service.d/override.conf
+sudo systemctl daemon-reload && sudo systemctl restart thermald
+journalctl -u thermald --since '1 min ago'   # "Using config file" sem erro
+# sob carga: for i in 1 2 3 4; do yes >/dev/null & done; observe cur_state subir >80C
+```
+> ⚠️ Commands de exemplo com `--` não podem ficar em comentários XML (duplo hífen) — usar
+> "since '1 min ago'" sem `--since` no arquivo XML.
+
+**Estado atual:** `thermald` active (`--ignore-default-control`), carrega o XML sem erro,
+PID a 80°C validado. Daemons: `thermald` + `auto-cpufreq` (ver tabela acima).
 
 ---
 
@@ -359,6 +400,7 @@ _(preencher a cada fase)_
 | `3de1e69` | C | Waybar barra flutuante "pill": margens 8px + border-radius 14px + borda completa sutil (largura medida 1904px) |
 | `e1aab38` | termo | `temp-watch` (pacote Stow `localbin`): script de monitor térmico + alertas SwayNC 85C/90C; stow/README/AGENTS/.gitignore |
 | `3e40e4f` | termo | Inicia `temp-watch` no autostart do Hyprland (appearance.lua); renomeia para binário sem `.sh` p/ PATH do Hyprland resolver |
+| `(novo)` | termo | Config custom do thermald: `thermal-conf.xml` (PID 80°C/kp=0.001 no `x86_pkg_temp`) + drop-in `--ignore-default-control`; versiona templates em setup/ e documenta achados |
 
 ---
 

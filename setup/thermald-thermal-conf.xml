@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!-- ============================================================================
+     THERMAL-CONF — Configuracao thermal do thermald (Trilha A de controle termico)
+     ============================================================================
+     Objetivo: amarrar o sensor de temperatura real do PACOTE CPU (x86_pkg_temp)
+     ao cooling device 'Processor' (throttle por reducao de frequencia),
+     fechando a lacuna dos trip points default do x86_pkg_temp (que ficam em
+     -274C, desativados; a protecao so vinha do auto-cpufreq + sensor ACPI).
+
+     Estrategia (Example 4 da man thermal-conf.xml.5):
+       - Um unico TripPoint passive a 80C no sensor x86_pkg_temp.
+       - <CoolingDevice type="Processor"> com <PidControl>: acima de 80C o
+         thermald calcula a compensacao (cur_state 0..10) proporcionalmente ao
+         excesso de temperatura sobre o set point (80C) e reduz a frequencia.
+       - Verificado empiricamente: 2 trips passive para o MESMO cdev fazem o
+         thermald usar apenas o de maior temperatura; PID com 1 trip e o
+         controle efetivo e documentado.
+
+     Instalacao (como root):
+       cp setup/thermald-thermal-conf.xml /etc/thermald/thermal-conf.xml
+       # e remover o modo adaptive do ExecStart (via drop-in):
+       #   /etc/systemd/system/thermald.service.d/override.conf
+       systemctl daemon-reload && systemctl restart thermald
+
+     Validacao:
+       journalctl -u thermald (since 1 min ago)
+       stress-ng -cpu 4 ou: for i in 1 2 3 4; do yes > /dev/null & done
+       - sensors: temp real do pacote sobe e estabiliza bem abaixo do crit.
+       - cat /sys/class/thermal/cooling_device8/cur_state (o cdev Processor
+         com IncDecStep=2 -> ST:2) sobe de 0 conforme a temp passa de 80C.
+     ============================================================================ -->
+<ThermalConfiguration>
+  <Platform>
+    <Name>Arch i3-1115G4 CPU throttle by pkg temp (PID 80C)</Name>
+    <ProductName>*</ProductName>
+    <Preference>QUIET</Preference>
+    <ThermalZones>
+      <ThermalZone>
+        <Type>x86_pkg_temp</Type>
+        <TripPoints>
+          <TripPoint>
+            <SensorType>x86_pkg_temp</SensorType>
+            <Temperature>80000</Temperature>
+            <type>passive</type>
+            <ControlType>SEQUENTIAL</ControlType>
+            <CoolingDevice>
+              <type>Processor</type>
+            </CoolingDevice>
+          </TripPoint>
+        </TripPoints>
+      </ThermalZone>
+    </ThermalZones>
+    <CoolingDevices>
+      <CoolingDevice>
+        <Type>Processor</Type>
+        <PidControl>
+          <kp>0.001</kp>
+          <kd>0</kd>
+          <ki>0</ki>
+        </PidControl>
+      </CoolingDevice>
+    </CoolingDevices>
+  </Platform>
+</ThermalConfiguration>

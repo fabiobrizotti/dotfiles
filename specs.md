@@ -365,6 +365,39 @@ PID a 80°C validado. Daemons: `thermald` + `auto-cpufreq` (ver tabela acima).
 
 ---
 
+## 🔐 Tela de bloqueio — coesão da fonte (2026-08-29)
+
+> **Objetivo:** corrigir a incoerência visual do placeholder do hyprlock ("Digite a senha..."),
+> que renderizava em **Noto Sans** (fonte default do `input-field`) enquanto relógio/data usam
+> **JetBrainsMono Nerd Font**.
+
+**Mudanças em `hypr/.config/hypr/hyprlock.conf` (bloco `input-field`):**
+- **`font_family = JetBrainsMono Nerd Font`** → placeholder e `fail_text` passam a usar a mesma
+  família de relógio/data (antes: default `Noto Sans`). Opção confirmada no sample oficial da
+  **v0.9.6** (`/usr/share/hypr/hyprlock.conf`: `font_family = $font`).
+- **`placeholder_text` corrigido** de `<span foreground="##a5adcb"><i>Digite a senha...</i></span>`
+  para `<span foreground="#a5adcb">Digite a senha...</span>`:
+  - `##a5adcb` era **cor Pango inválida** → o placeholder caía no fallback `font_color`
+    (`#cad3f5`). Pango rejeita explicitamente: `Value of 'foreground' attribute ... could not be
+    parsed; should be a color specification, not '##a5adcb'` (validado via `pango-view`, exit 1).
+    Com `#a5adcb` (subtext0) fica um tom apagado e correto na paleta Macchiato.
+  - Removido o itálico (`<i>`) do placeholder (decisão do usuário; coesão com relógio/data).
+- **Mantidos:** `hide_input = false` (bolinhas / dots — comportamento já ativo), dots
+  (0.28/0.15/center) e `fail_text` com itálico (ênfase transitória de erro).
+
+> **Achado sobre `hide_input` (v0.9.6):** `false`/default = **dots** (bolinhas; o texto digitado
+> nunca foi exibido como letras); `true` = indicador estilo swaylock que **não revela o
+> comprimento** da senha. A config original já era consistente (`hide_input = false` + dots) —
+> nenhuma ação necessária.
+
+**Validação:** `hyprlock --immediate-render` sem erros/avisos no log (1920×1080); markup novo
+aceito pelo Pango (exit 0) e antigo rejeitado (exit 1); `fc-match 'JetBrainsMono Nerd Font'` →
+`JetBrainsMonoNerdFont-Regular.ttf`. Capturas para conferência visual (o agente não vê imagem):
+`/tmp/opencode/hyprlock-check.png` (tela cheia) e `/tmp/opencode/hyprlock-crop.png` (relógio +
+data + campo).
+
+---
+
 ## 📝 Histórico de commits / mudanças
 
 _(preencher a cada fase)_
@@ -401,6 +434,7 @@ _(preencher a cada fase)_
 | `e1aab38` | termo | `temp-watch` (pacote Stow `localbin`): script de monitor térmico + alertas SwayNC 85C/90C; stow/README/AGENTS/.gitignore |
 | `3e40e4f` | termo | Inicia `temp-watch` no autostart do Hyprland (appearance.lua); renomeia para binário sem `.sh` p/ PATH do Hyprland resolver |
 | `(novo)` | termo | Config custom do thermald: `thermal-conf.xml` (PID 80°C/kp=0.001 no `x86_pkg_temp`) + drop-in `--ignore-default-control`; versiona templates em setup/ e documenta achados |
+| `(novo)` | lock | Hyprlock: `font_family = JetBrainsMono Nerd Font` no `input-field`; corrige `##a5adcb` → `#a5adcb` e remove `<i>` do "Digite a senha..." |
 
 ---
 

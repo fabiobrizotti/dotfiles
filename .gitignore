@@ -33,4 +33,4 @@ graphify-out/
 !localbin/
 !localbin/.local/
 !localbin/.local/bin/
-!localbin/.local/bin/temp-watch.sh
+!localbin/.local/bin/temp-watch

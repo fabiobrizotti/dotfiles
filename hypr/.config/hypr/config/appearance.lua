@@ -18,6 +18,8 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("swayosd-server")
   hl.exec_cmd("swaync")
   hl.exec_cmd("hypridle")
+  -- Monitor térmico (temp-watch.sh, pacote localbin) — alerta SwayNC 85C/90C
+  hl.exec_cmd("temp-watch")
   -- Autostart Clipboard Watcher
   hl.exec_cmd("wl-paste --type text --watch cliphist store")
   hl.exec_cmd("wl-paste --type image --watch cliphist store")

@@ -274,6 +274,56 @@ comportamento foi restaurado (59 binds → workspaces funcionando).
 
 ---
 
+## 🌡️ Controle Térmico + Alertas SwayNC (2026-08-28)
+
+> **Objetivo:** proteger a CPU (Intel i3-1115G4, Tiger Lake) contra superaquecimento
+> com segurança térmica automática + alertas visuais, e centralizar tudo nos dotfiles.
+
+### Decisão de abordagem: **Trilha A** (throttling de CPU), **sem controle manual de ventoinha**
+- **Hardware:** laptop, `intel_pstate` ativo, **sem chip PWM** → `fancontrol`/`pwmconfig`
+  **não têm efeito** (confirmado: nenhum `pwm*`/`fan*_input` em hwmon; ventoinhas são
+  `cooling_device` ACPI **on/off binário**, `max_state=1`). Controle manual de ventoinha
+  descartado.
+- **Solução:** `thermald` (daemon Intel de throttling) + `auto-cpufreq` (governor adaptativo
+  por carga/energia/temperatura). Ambos **complementares**: thermald throttla por temp,
+  auto-cpufreq ajusta o governor.
+- **Descartados (evitar):** `power-profiles-daemon` e `tlp` (conflitariam com auto-cpufreq).
+- **Governor atual:** `performance` (gerido pelo auto-cpufreq, que faz throttling por baixo).
+
+### Daemons instalados/ativos
+| Pacote | Origem | Estado | Validação |
+|--------|--------|--------|-----------|
+| `thermald` (2.5.12) | pacman | active (`--adaptive`) | `systemctl is-active thermald` |
+| `auto-cpufreq` (3.1.0) | AUR/yay | active (daemon) | `auto-cpufreq --stats` |
+
+Instalados manualmente na sessão; registrados em `setup/install-deps.sh` / `bkp-pacotes.sh`.
+
+### Alerta térmico — `temp-watch` (pacote Stow `localbin`)
+- **Arquivo:** `localbin/.local/bin/temp-watch` (binário **sem extensão** para o PATH do
+  Hyprland resolver) → symlink `~/.local/bin/temp-watch`.
+- **Limiares (configuráveis por env):** `ALERT=85°C` (notificação normal), `CRIT=90°C`
+  (notificação crítica). Teto de segurança bem abaixo do crit Intel de 100°C.
+- **Lógica:** lê `temp1_input` do `coretemp-isa-0000` via `sensors -u`. Debounce por
+  **subida de estado** (normal→alta→crítica) + **histerese de 3°C** para não spammar.
+- **Notificação:** `notify-send` (interceptado pelo SwayNC; nenhuma mudança no swaync).
+- **Agendamento:** autostart via `hl.exec_cmd("temp-watch")` no bloco `hyprland.start` do
+  `appearance.lua` → roda junto da sessão gráfica e **morre com ela** (comportamento correto).
+  Não duplica no `hyprctl reload` (o bloco `start` só roda no login).
+- **Achado importante:** o PATH do processo Hyprland já inclui `/home/brizotti/.local/bin`
+  (confirmado via `/proc/<pid>/environ`), então `temp-watch` resolve sem caminho absoluto.
+
+### Como validar
+- `temp-watch --once` → imprime a temp do pacote e limiares.
+- `systemctl is-active thermald auto-cpufreq` → ambos `active`.
+- `auto-cpufreq --stats` → governor/temp/carga.
+- `sensors` (coretemp) → temperatura real.
+- `hyprctl reload` → `ok`; binds **49**; `decoration:blur:size=8`, `passes=3`.
+
+### 🔐 Pedência de segurança (herdada)
+- **TROCAR AS SENHAS TEMPORÁRIAS `031222`** (brizotti e root) o quanto antes.
+
+---
+
 ## 📝 Histórico de commits / mudanças
 
 _(preencher a cada fase)_
@@ -307,6 +357,8 @@ _(preencher a cada fase)_
 | `c018fd6` | A | Animações médias: ativa fadeIn/Out/Switch/Shadow/Dim, windowsIn/Out (`slide`), windowsMove, borderangle — 9 folhas `enabled: 1`, binds 49 intactos |
 | `10d68d6` | B | Waybar micro-polimento: tooltip glass, hover de pill elevado, #mpris com borda verde + elevação, transições padronizadas (0.3s), dedupe do #battery |
 | `3de1e69` | C | Waybar barra flutuante "pill": margens 8px + border-radius 14px + borda completa sutil (largura medida 1904px) |
+| `e1aab38` | termo | `temp-watch` (pacote Stow `localbin`): script de monitor térmico + alertas SwayNC 85C/90C; stow/README/AGENTS/.gitignore |
+| `3e40e4f` | termo | Inicia `temp-watch` no autostart do Hyprland (appearance.lua); renomeia para binário sem `.sh` p/ PATH do Hyprland resolver |
 
 ---
 

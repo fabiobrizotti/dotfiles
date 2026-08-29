@@ -14,11 +14,14 @@ set -euo pipefail
 is_installed() { pacman -Q "$1" >/dev/null 2>&1; }
 
 # Pacotes do repositório oficial (pacman)
-OFFICIAL=()
+OFFICIAL=(
+    thermald            # daemon Intel de throttle térmico (Trilha A de controle térmico)
+)
 
 # Pacotes da AUR (via yay)
 AUR=(
     bibata-cursor-theme   # cursor Bibata-Modern-Classic (Hyprland já referencia)
+    auto-cpufreq          # governor adaptativo por carga/energia/temp (Trilha A)
 )
 
 check() {

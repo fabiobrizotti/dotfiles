@@ -251,3 +251,18 @@ tooltip {
 tooltip label {
   color: @text;
 }
+
+#temperature {
+  color: @orange;
+  font-weight: bold;
+  padding: 0 8px;
+}
+
+#temperature.critical {
+  color: #ed8796; /* Vermelho Catppuccin quando passar do limite */
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}

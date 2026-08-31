@@ -19,6 +19,7 @@
   "modules-right": [
     "cpu",
     "memory",
+    "temperature",
     "network",
     "bluetooth",
     "wireplumber",
@@ -185,6 +186,22 @@
     "interval": 2,
     "format": " {}%",
     "tooltip-format": "RAM Usada: {used:0.1f}GiB / {total:0.1f}GiB",
+    "on-click": "kitty --class btop-float -e btop"
+  },
+  "temperature": {
+    "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+    "critical-threshold": 80,
+    "format": "{icon} {temperatureC}°C",
+    "format-critical": "{icon} {temperatureC}°C",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "tooltip-format": "Temperatura da CPU: {temperatureC}°C",
+    "interval": 2,
     "on-click": "kitty --class btop-float -e btop"
   }
 }

@@ -1,268 +1,121 @@
-@define-color rosewater #f4dbd6;
-@define-color flamingo #f0c6c6;
-@define-color pink #f5bde6;
-@define-color mauve #c6a0f6;
-@define-color red #ed8796;
-@define-color maroon #ee99a0;
-@define-color peach #f5a97f;
-@define-color yellow #eed49f;
-@define-color green #a6da95;
-@define-color teal #8bd5ca;
-@define-color sky #91d7e3;
-@define-color sapphire #7dc4e4;
-@define-color blue #8aadf4;
-@define-color lavender #b7bdf8;
-@define-color text #cad3f5;
-@define-color subtext1 #b8c0e0;
-@define-color subtext0 #a5adcb;
-@define-color overlay2 #939ab7;
-@define-color overlay1 #8087a2;
-@define-color overlay0 #6e738d;
-@define-color surface2 #5b6078;
-@define-color surface1 #494d64;
-@define-color surface0 #363a4f;
-@define-color base #24273a;
-@define-color mantle #1e2030;
-@define-color crust #181926;
-@define-color orange #fc7b53;
-@define-color peach #f5a97f;
-
-
 * {
-  font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 13px;
-  border: none;
-  min-height: 0;
+    font-family: "JetBrainsMono Nerd Font", "Geist Mono", monospace;
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
 }
 
 window#waybar {
-  /* Barra "pill" flutuante: fundo mantle translúcido — o Hyprland blura o que
-     está por trás (blur em look.lua). Margens de 8px via config.jsonc desprendem
-     a barra das bordas; cantos arredondados (raio 14, ecoa o das janelas).
-     Borda em volta toda substitui a antiga border-bottom full-width. */
-  background-color: rgba(30, 32, 48, 0.55);
-  border: 1px solid alpha(@orange, 0.4);
-  border-radius: 14px;
-  color: @sapphire;
-  padding: 6px 12px;
-  min-height: 36px;
-  transition: 0.3s all;
+    background-color: rgba(0, 0, 0, 0.70);
+    color: #d4d4d8;
+    border-bottom: 1px solid rgba(255, 85, 0, 0.15);
 }
 
-.modules-left,
-.modules-center,
-.modules-right {
-  padding: 0 1rem;
-  color: @orange;
-  border: none;
-  min-height: 32px;
+/* Neutralizacao global — sem herança de fundos nativos */
+#custom-icon,
+#window,
+#mpris,
+#custom-notification,
+#workspaces,
+#cpu,
+#memory,
+#temperature,
+#network,
+#bluetooth,
+#wireplumber,
+#backlight,
+#tray,
+#clock,
+#battery {
+    background: transparent;
+    background-color: transparent;
+    color: #d4d4d8;
+    padding: 0 7px;
+    margin: 0;
 }
 
-.modules-center {
-  padding: 2px;
-}
-
+/* Ícone do sistema (esquerda) */
 #custom-icon {
-  font-size: 16px;
-  padding-right: 5px;
-  transition: all 0.3s ease; /* consistente com o timing geral de 0.3s */
+    color: #ff5500;
+    padding-left: 12px;
+    padding-right: 6px;
 }
 
+/* Título da janela ativa */
 #window {
-  font-weight: bold;
-  color: @orange;
-  transition: all 0.3s ease;
+    color: #a1a1aa;
+    font-weight: 600;
 }
 
+/* Notificações */
+#custom-notification {
+    color: #ff5500;
+    padding-right: 12px;
+}
+
+/* Mpris */
+#mpris {
+    color: #a1a1aa;
+}
+
+/* Workspaces */
 #workspaces {
-  font-weight: bold;
-  font-size: 11px;
-  border: none;
+    padding: 0 4px;
 }
 
 #workspaces button {
-  color: @orange;
-  padding: 0 8px;
-  border-radius: 10px;
-  margin: 0 2px;
-  transition: background 0.3s ease,
-              color 0.3s ease,
-              border-radius 0.3s ease;
-}
-
-/* Hover: "levanta" a pill (fundo mais presente) para indicar que é clicável */
-#workspaces button:hover {
-  background: alpha(@surface1, 0.7);
-}
-
-#workspaces button.urgent {
-  color: @blue;
+    padding: 0 6px;
+    margin: 0 1px;
+    color: #52525b;
+    background: transparent;
+    transition: all 0.2s ease;
 }
 
 #workspaces button.active {
-  background: alpha(@orange, 0.85);
-  color: @crust;
-  border-radius: 12px;
+    color: #ff5500;
+    font-weight: 700;
 }
 
-#tray {
-  color: @orange;
-  transition: all 0.3s ease;
+#workspaces button:hover {
+    color: #ff884d;
+    background: transparent;
+    box-shadow: none;
 }
 
+/* Grupos direita */
+#hardware,
+#controls,
+#status {
+    margin: 0 4px;
+    padding: 0 2px;
+}
+
+/* Relógio */
 #clock {
-  transition: all 0.3s ease;
-  font-weight: bold;
+    color: #d4d4d8;
+    font-weight: 600;
 }
 
-#clock:hover {
-  color: @yellow;
-}
-
-/* BATERIA */
+/* Bateria */
 #battery {
-  color: @orange;
-  font-weight: bold;
-  transition: all 0.3s ease;
+    padding-right: 12px;
 }
 
-#battery:hover {
-  color: @yellow;
-}
-
-/* Ícone da bateria levemente maior para equilíbrio de peso visual */
-#battery span,
-#battery .icon {
-  font-size: 14px;
-}
-
-/* Estado: warning (<= 30%) */
-#battery.warning {
-  color: @yellow;
-}
-
-/* Estado: critical (<= 15%) — pisca rápido para chamar atenção */
-#battery.critical {
-  color: @red;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-/* Carregando ou plugada em 100% — piscar suave (1s, menos intrusivo) */
 #battery.charging,
 #battery.plugged {
-  color: @green;
-  animation-name: blink;
-  animation-duration: 1s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+    color: #4ade80;
 }
 
-/* Efeito de piscar = fade in/out da cor, suavizando o aviso */
-@keyframes blink {
-  to {
-    color: #ffffff;
-    opacity: 0.5;
-  }
-}
-
-
-#wireplumber,
-#backlight {
-  color: @orange;
-  font-weight: bold;
-  padding: 0 8px;
-  transition: all 0.3s ease;
-}
-
-#wireplumber:hover,
-#backlight:hover {
-  color: @orange;
-}
-
-#wireplumber.muted {
-  color: @red;
-}
-
-/* Módulo de Notificação */
-#custom-notification {
-  padding: 0 10px;
-  color: @orange;
-  font-size: 14px;
-  transition: all 0.3s ease;
-}
-
-#custom-notification:hover {
-  color: @yellow;
-}
-
-/* Módulo de Mídia / Spotify — pill verde (positivo = tocando) com elevação sutil
-   (border + box-shadow. transform/scale não são aceitos pelo parser GTK do waybar) */
-#mpris {
-  padding: 0 12px;
-  color: @green;
-  font-weight: bold;
-  background-color: alpha(@surface0, 0.5);
-  border: 1px solid alpha(@green, 0.25);
-  border-radius: 8px;
-  margin: 2px 5px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s ease;
-}
-
-#mpris.paused {
-  color: @subtext0;
-  background-color: transparent;
-  border-color: transparent;
-  box-shadow: none;
-}
-#network,
-#bluetooth {
-  color: @orange;
-  font-weight: bold;
-  padding: 0 8px;
-  transition: all 0.3s ease;
-}
-
-#network:hover,
-#bluetooth:hover {
-  color: @yellow;
-}
-
-#network.disconnected,
-#bluetooth.disabled,
-#bluetooth.off {
-  color: @subtext0;
-}
-
-/* TOOLTIP — mesma linguagem "glass" dos painéis: alfa alto (leitura), raio 10,
-   borda laranja sutil e elevação para flutuar sobre a barra */
-tooltip {
-  background: rgba(24, 25, 38, 0.95);
-  border: 1px solid alpha(@orange, 0.4);
-  border-radius: 10px;
-  color: @text;
-}
-
-tooltip label {
-  color: @text;
-}
-
-#temperature {
-  color: @orange;
-  font-weight: bold;
-  padding: 0 8px;
-}
-
-#temperature.critical {
-  color: #ed8796; /* Vermelho Catppuccin quando passar do limite */
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+/* Estados críticos — apenas texto, fundo sempre transparente */
+#cpu.critical,
+#memory.critical,
+#temperature.critical,
+#battery.critical:not(.charging) {
+    color: #ef4444;
+    background: transparent;
+    background-color: transparent;
 }

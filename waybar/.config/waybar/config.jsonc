@@ -1,12 +1,13 @@
 {
     "layer": "top",
-    "reload_on_style_change": true,
+    "exclusive": true,
     "position": "top",
-    "spacing": 10,
-    "margin-top": 8,
-    "margin-left": 8,
-    "margin-right": 8,
-    "margin-bottom": 0,
+    "spacing": 0,
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "margin-bottom": 1,
+    "reload_on_style_change": true,
     "modules-left": [
         "custom/icon",
         "hyprland/window",
@@ -17,19 +18,12 @@
         "hyprland/workspaces"
     ],
     "modules-right": [
-        "cpu",
-        "memory",
-        "temperature",
-        "network",
-        "bluetooth",
-        "wireplumber",
-        "backlight",
-        "tray",
-        "clock",
-        "battery"
+        "group/hardware",
+        "group/controls",
+        "group/status"
     ],
     "custom/icon": {
-        "format": "\uee15"
+        "format": ""
     },
     "hyprland/window": {
         "separate-outputs": true,
@@ -46,109 +40,102 @@
         "on-click": "activate",
         "format": "{icon}",
         "format-icons": {
-            "1": "i",
-            "2": "ii",
-            "3": "iii",
-            "4": "iv",
-            "5": "v",
-            "6": "vi",
-            "7": "vii",
-            "8": "viii",
-            "9": "ix",
-            "10": "x"
+            "1": "i", "2": "ii", "3": "iii", "4": "iv", "5": "v",
+            "6": "vi", "7": "vii", "8": "viii", "9": "ix", "10": "x"
         }
     },
+    "cpu": {
+        "interval": 2,
+        "enable-markup": true,
+        "format": "<span color='#ff5500'></span>  <span color='#d4d4d8'>{usage}%</span>  <span color='#71717a'>{avg_frequency:.1f}GHz</span>",
+        "on-click": "kitty -e btop",
+        "tooltip": true
+    },
+    "memory": {
+        "interval": 2,
+        "enable-markup": true,
+        "format": "<span color='#ff5500'></span>  <span color='#d4d4d8'>{percentage}%</span>  <span color='#71717a'>{used:0.1f}G</span>",
+        "tooltip-format": "{used:0.1f}G / {total:0.1f}G",
+        "on-click": "kitty -e btop"
+    },
+    "temperature": {
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input",
+        "critical-threshold": 80,
+        "interval": 2,
+        "enable-markup": true,
+        "format": "<span color='#ff5500'>{icon}</span>  <span color='#d4d4d8'>{temperatureC}°C</span>",
+        "format-critical": "<span color='#ef4444'>{icon}</span>  <span color='#ef4444'>{temperatureC}°C</span>",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip-format": "CPU: {temperatureC}°C",
+        "on-click": "kitty --class btop-float -e btop"
+    },
     "network": {
-        "format-wifi": "\udb82\udd28 {essid}",
-        "format-ethernet": "\udb80\ude00 Conectado",
-        "format-linked": "\udb80\ude00 {ifname} (Sem IP)",
-        "format-disconnected": "\udb82\udd2d Desconectado",
+        "enable-markup": true,
+        "format-wifi": "<span color='#ff5500'>󰤨</span>  <span color='#d4d4d8'>{essid}</span>  <span color='#71717a'>{signalStrength}%</span>",
+        "format-ethernet": "<span color='#ff5500'>󰈀</span>  <span color='#d4d4d8'>Conectado</span>",
+        "format-linked": "<span color='#71717a'>󰈀</span>  <span color='#71717a'>{ifname}</span>",
+        "format-disconnected": "<span color='#ef4444'>󰤭</span>  <span color='#71717a'>Offline</span>",
         "tooltip-format-wifi": "Sinal: {signalStrength}% | IP: {ipaddr}",
         "tooltip-format-ethernet": "Interface: {ifname} | IP: {ipaddr}",
-        "tooltip-format-disconnected": "Sem conex\u00e3o de rede",
+        "tooltip-format-disconnected": "Sem conexão de rede",
         "on-click": "kitty --class impala-float -e impala",
         "on-click-right": "kitty -e nmtui"
     },
     "bluetooth": {
-        "format": "\udb80\udcaf {status}",
-        "format-disabled": "\udb80\udcb2 Desativado",
-        "format-off": "\udb80\udcb2 Desligado",
-        "format-connected": "\udb80\udcb1 {device_alias}",
-        "format-connected-battery": "\udb80\udcb1 {device_alias} ({device_battery_percentage}%)",
-        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} dispositivo(s) conectado(s)",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} dispositivo(s) conectado(s):\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
+        "enable-markup": true,
+        "format": "<span color='#ff5500'>󰂯</span>  <span color='#71717a'>{status}</span>",
+        "format-disabled": "<span color='#52525b'>󰂲</span>  <span color='#52525b'>Off</span>",
+        "format-off": "<span color='#52525b'>󰂲</span>  <span color='#52525b'>Off</span>",
+        "format-connected": "<span color='#ff5500'>󰂱</span>  <span color='#d4d4d8'>{device_alias}</span>",
+        "format-connected-battery": "<span color='#ff5500'>󰂱</span>  <span color='#d4d4d8'>{device_alias}</span>  <span color='#71717a'>({device_battery_percentage}%)</span>",
+        "tooltip-format-connected": "{controller_alias}\n{num_connections} dispositivo(s):\n{device_enumerate}",
         "on-click": "blueman-manager"
     },
     "wireplumber": {
-        "format": "{icon} {volume}%",
-        "format-muted": "\udb81\udf5f Mute",
-        "format-icons": [
-            "\udb81\udd7f",
-            "\udb81\udd80",
-            "\udb81\udd7e"
-        ],
+        "enable-markup": true,
+        "format": "<span color='#ff5500'>{icon}</span>  <span color='#d4d4d8'>{volume}%</span>",
+        "format-muted": "<span color='#52525b'>󰝟</span>  <span color='#52525b'>Mute</span>",
+        "format-icons": ["󰕿", "󰖀", "󰕾"],
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
         "scroll-step": 5
     },
     "backlight": {
         "device": "intel_backlight",
-        "format": "{icon} {percent}%",
-        "format-icons": [
-            "\udb80\udcde",
-            "\udb80\udcdf",
-            "\udb80\udce0"
-        ]
+        "enable-markup": true,
+        "format": "<span color='#ff5500'>{icon}</span>  <span color='#d4d4d8'>{percent}%</span>",
+        "format-icons": ["󰃞", "󰃟", "󰃠"]
     },
     "battery": {
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% \udb80\udc84",
-        "format-plugged": "{capacity}% \udb81\udea5",
+        "states": { "warning": 30, "critical": 15 },
+        "enable-markup": true,
+        "format": "<span color='#ff5500'>{icon}</span>  <span color='#d4d4d8'>{capacity}%</span>",
+        "format-charging": "<span color='#4ade80'>󰂄</span>  <span color='#d4d4d8'>{capacity}%</span>",
+        "format-plugged": "<span color='#4ade80'>󰚥</span>  <span color='#d4d4d8'>{capacity}%</span>",
         "format-icons": [
-            "\udb80\udc8e",
-            "\udb80\udc7a",
-            "\udb80\udc7b",
-            "\udb80\udc7c",
-            "\udb80\udc7d",
-            "\udb80\udc7e",
-            "\udb80\udc7f",
-            "\udb80\udc80",
-            "\udb80\udc81",
-            "\udb80\udc82",
-            "\udb80\udc79"
+            "󰂎", "󰁺", "󰁻", "󰁼",
+            "󰁽", "󰁾", "󰁿", "󰂀",
+            "󰂁", "󰂂", "󰁹"
         ]
     },
-    "tray": {
-        "icon-size": 16,
-        "spacing": 5,
-        "show-passive-items": true
-    },
     "clock": {
-        "format": "<span>\uf4ab</span>  {:%H:%M}",
         "interval": 1,
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "calendar": {
-            "format": {
-                "today": "<span color='#eed49f'><b>{}</b></span>"
-            }
-        },
+        "enable-markup": true,
+        "format": "<span color='#ff5500'></span>  <span color='#d4d4d8'>{:%H:%M}</span>",
+        "tooltip-format": "{:%Y %B}\n{calendar}",
+        "calendar": { "format": { "today": "**{}**" } },
         "on-click": "gnome-calendar"
     },
+    "tray": {
+        "icon-size": 14,
+        "spacing": 8,
+        "show-passive-items": true
+    },
     "mpris": {
-        "format": "\udb80\udecb {player_icon} {artist} - {title}",
-        "format-paused": "\udb80\udfe4 {status_icon} {artist} - {title}",
-        "player-icons": {
-            "default": "\udb80\udf86",
-            "mpd": "\udb80\udf86"
-        },
-        "status-icons": {
-            "paused": "\udb80\udfe4"
-        },
+        "enable-markup": true,
+        "format": "<span color='#ff5500'>󰋋</span>  <span color='#a1a1aa'>{artist} - {title}</span>",
+        "format-paused": "<span color='#52525b'>󰏤</span>  <span color='#52525b'>{artist} - {title}</span>",
+        "player-icons": { "default": "󰎆", "mpd": "󰎆" },
+        "status-icons": { "paused": "󰏤" },
         "max-length": 30,
         "interval": 1,
         "on-click": "playerctl play-pause",
@@ -159,14 +146,14 @@
         "tooltip": false,
         "format": "{icon}",
         "format-icons": {
-            "notification": "\uf0a2<span foreground='red'><sup>\udb83\udc14</sup></span>",
-            "none": "\uf0a2",
-            "dnd-notification": "\uf1f7<span foreground='red'><sup>\udb83\udc14</sup></span>",
-            "dnd-none": "\uf1f7",
-            "inhibited-notification": "\uf0a2<span foreground='red'><sup>\udb83\udc14</sup></span>",
-            "inhibited-none": "\uf0a2",
-            "dnd-inhibited-notification": "\uf1f7<span foreground='red'><sup>\udb83\udc14</sup></span>",
-            "dnd-inhibited-none": "\uf1f7"
+            "notification": "󰰔",
+            "none": "",
+            "dnd-notification": "󰰔",
+            "dnd-none": "",
+            "inhibited-notification": "󰰔",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "󰰔",
+            "dnd-inhibited-none": ""
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
@@ -175,32 +162,16 @@
         "on-click-right": "swaync-client -d -sw",
         "escape": true
     },
-    "cpu": {
-        "interval": 2,
-        "format": "\uf4bc {usage}%",
-        "on-click": "kitty -e btop",
-        "tooltip": true
+    "group/hardware": {
+        "orientation": "inherit",
+        "modules": ["cpu", "memory", "temperature"]
     },
-    "memory": {
-        "interval": 2,
-        "format": "\uefc5 {}%",
-        "tooltip-format": "{used:0.1f}G / {total:0.1f}G",
-        "on-click": "kitty -e btop"
+    "group/controls": {
+        "orientation": "inherit",
+        "modules": ["network", "bluetooth", "wireplumber", "backlight"]
     },
-    "temperature": {
-        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input",
-        "critical-threshold": 80,
-        "format": "{icon} {temperatureC}\u00b0C",
-        "format-critical": "{icon} {temperatureC}\u00b0C",
-        "format-icons": [
-            "\uf2cb",
-            "\uf2ca",
-            "\uf2c9",
-            "\uf2c8",
-            "\uf2c7"
-        ],
-        "tooltip-format": "Temperatura da CPU: {temperatureC}\u00b0C",
-        "interval": 2,
-        "on-click": "kitty --class btop-float -e btop"
+    "group/status": {
+        "orientation": "inherit",
+        "modules": ["tray", "clock", "battery"]
     }
 }

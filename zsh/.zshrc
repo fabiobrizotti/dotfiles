@@ -87,3 +87,5 @@ bkp-pacotes() {
 
 # Adiciona o PATH do uv (gerencia ferramentas Python locais em ~/.local/bin)
 [ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+setopt INTERACTIVE_COMMENTS
+export PATH=~/.npm-global/bin:$PATH

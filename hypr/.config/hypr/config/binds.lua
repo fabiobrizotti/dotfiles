@@ -8,7 +8,7 @@ local mainMod = "SUPER"
 -- Apps Binds
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(PROGRAMS.terminal))
 hl.bind(mainMod .. " + Escape", hl.dsp.window.close())
-hl.bind("ALT + Tab", hl.dsp.window.cycle_next())
+hl.bind(mainMod .. " + Tab", hl.dsp.exec_cmd("hyprswitch gui --mod-key SUPER --key Tab --close mod-key-release"))
 hl.bind("ALT + SHIFT + Tab", hl.dsp.window.cycle_next({ next = false }))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("kitty --class impala-float -e impala"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("blueman-manager"))

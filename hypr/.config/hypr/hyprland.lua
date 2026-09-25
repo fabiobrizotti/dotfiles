@@ -34,7 +34,6 @@ misc = {
 }
 
 -- macOS features
-hl.bind("SUPER", "grave",  "hyprswitch gui --mod-key SUPER --key grave --close mod-key-release"))
 
 hl.curve("macStyle", { type = "bezier", points = { {0.05, 0.9}, {0.1, 1.0} } })
 hl.animation({ leaf = "windows", enabled = true, speed = 6, bezier = "macStyle", style = "popin 80%" })

@@ -18,23 +18,20 @@ hl.config({
     },
 
     decoration = {
-        rounding         = 12,
-        rounding_power   = 2,
-        active_opacity   = 0.97,
-        inactive_opacity = 0.93,
-        shadow           = {
-            enabled      = true,
-            range        = 6,
-            render_power = 3,
-            color        = 0xcc0a0a0a,
+        rounding = 15,
+        rounding_power = 2,
+        blur = {
+            enabled = true,
+            size = 8,
+            passes = 3,
+            vibrancy = 0.20,
+            ignore_opacity = true,
         },
-        blur             = {
-            enabled             = true,
-            size                = 8,
-            passes              = 3,
-            vibrancy            = 0.2,
-            xray                = true,
-            new_optimizations   = true,
+        shadow = {
+            enabled = true,
+            range = 30,
+            render_power = 3,
+            color = "rgba(00000033)",
         },
     },
 
@@ -74,12 +71,12 @@ hl.config({
 -- ============================================================================
 
 -- --- Curvas ---
-hl.curve("easeOutQuint",   { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } }) -- desacelera no fim → entrada suave
-hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.05 }, { 0.36, 1 } } }) -- acelera e desacelera → saída/troca
-hl.curve("linear",         { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })          -- sem easing → movimento constante
-hl.curve("almostLinear",   { type = "bezier", points = { { 0.5, 0.5 }, { 0.75, 1 } } })   -- quase linear, leve respiro no início
-hl.curve("quick",          { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })     -- arranque rápido → escala/pop
-hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 }) -- spring das janelas
+hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })                   -- desacelera no fim → entrada suave
+hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.05 }, { 0.36, 1 } } })              -- acelera e desacelera → saída/troca
+hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })                               -- sem easing → movimento constante
+hl.curve("almostLinear", { type = "bezier", points = { { 0.5, 0.5 }, { 0.75, 1 } } })                  -- quase linear, leve respiro no início
+hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })                           -- arranque rápido → escala/pop
+hl.curve("easy", { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })           -- spring das janelas
 
 -- --- Folhas base ---
 -- global: velocidade padrão herdada pelas demais folhas

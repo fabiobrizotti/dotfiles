@@ -24,6 +24,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("wl-paste --type text --watch cliphist store")
   hl.exec_cmd("wl-paste --type image --watch cliphist store")
 end)
+hl.exec_cmd("systemctl --user start hyprpolkitagent")
 
 -- Variáveis de Ambiente para GTK, Qt e Cursores
 hl.env("GTK_THEME", "adw-gtk3-dark")

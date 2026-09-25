@@ -1,207 +1,206 @@
 {
-  "layer": "top",
-  "reload_on_style_change": true,
-  "position": "top",
-  "spacing": 10,
-  "margin-top": 8,
-  "margin-left": 8,
-  "margin-right": 8,
-  "margin-bottom": 0,
-  "modules-left": [
-    "custom/icon",
-    "hyprland/window",
-    "mpris",
-    "custom/notification"
-  ],
-  "modules-center": [
-    "hyprland/workspaces"
-  ],
-  "modules-right": [
-    "cpu",
-    "memory",
-    "temperature",
-    "network",
-    "bluetooth",
-    "wireplumber",
-    "backlight",
-    "tray",
-    "clock",
-    "battery"
-  ],
-  "custom/icon": {
-    "format": ""
-  },
-  "hyprland/window": {
-    "separate-outputs": true,
-    "format": "{class}",
-    "rewrite": {
-      "": "Brizotti",
-      "kitty": "Brizotti",
-      "vesktop": "Discord",
-      "zen": "Browser"
-    }
-  },
-  "hyprland/workspaces": {
-    "disable-scroll": true,
-    "on-click": "activate",
-    "format": "{icon}",
-    "format-icons": {
-      "1": "i",
-      "2": "ii",
-      "3": "iii",
-      "4": "iv",
-      "5": "v",
-      "6": "vi",
-      "7": "vii",
-      "8": "viii",
-      "9": "ix",
-      "10": "x"
-    }
-  },
-  // Módulo de Rede / Wi-Fi
-  "network": {
-    "format-wifi": "󰤨 {essid}",
-    "format-ethernet": "󰈀 Conectado",
-    "format-linked": "󰈀 {ifname} (Sem IP)",
-    "format-disconnected": "󰤭 Desconectado",
-    "tooltip-format-wifi": "Sinal: {signalStrength}% | IP: {ipaddr}",
-    "tooltip-format-ethernet": "Interface: {ifname} | IP: {ipaddr}",
-    "tooltip-format-disconnected": "Sem conexão de rede",
-    "on-click": "kitty --class impala-float -e impala"
-  },
-  // Módulo de Bluetooth
-  "bluetooth": {
-    "format": "󰂯 {status}",
-    "format-disabled": "󰂲 Desativado",
-    "format-off": "󰂲 Desligado",
-    "format-connected": "󰂱 {device_alias}",
-    "format-connected-battery": "󰂱 {device_alias} ({device_battery_percentage}%)",
-    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} dispositivo(s) conectado(s)",
-    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} dispositivo(s) conectado(s):\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
-    "on-click": "blueman-manager"
-  },
-  // Módulo de Volume
-  "wireplumber": {
-    "format": "{icon} {volume}%",
-    "format-muted": "󰝟 Mute",
-    "format-icons": [
-      "󰕿",
-      "󰖀",
-      "󰕾"
+    "layer": "top",
+    "reload_on_style_change": true,
+    "position": "top",
+    "spacing": 10,
+    "margin-top": 8,
+    "margin-left": 8,
+    "margin-right": 8,
+    "margin-bottom": 0,
+    "modules-left": [
+        "custom/icon",
+        "hyprland/window",
+        "mpris",
+        "custom/notification"
     ],
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "scroll-step": 5
-  },
-  // Módulo de Brilho
-  "backlight": {
-    "device": "intel_backlight",
-    "format": "{icon} {percent}%",
-    "format-icons": [
-      "󰃞",
-      "󰃟",
-      "󰃠"
-    ]
-  },
-  // Módulo de Bateria
-  "battery": {
-    "states": {
-      "warning": 30,
-      "critical": 15
-    },
-    "format": "{capacity}% {icon}",
-    "format-charging": "{capacity}% 󰂄",
-    "format-plugged": "{capacity}% 󰚥",
-    "format-icons": [
-      "󰂎",
-      "󰁺",
-      "󰁻",
-      "󰁼",
-      "󰁽",
-      "󰁾",
-      "󰁿",
-      "󰂀",
-      "󰂁",
-      "󰂂",
-      "󰁹"
-    ]
-  },
-  "tray": {
-    "icon-size": 16,
-    "spacing": 5,
-    "show-passive-items": true
-  },
-  "clock": {
-    "format": "<span></span>  {:%H:%M}",
-    "interval": 1,
-    "tooltip-format": "<tt>{calendar}</tt>",
-    "calendar": {
-      "format": {
-        "today": "<span color='#eed49f'><b>{}</b></span>"
-      }
-    }
-  },
-  // Módulo de Música
-  "mpris": {
-    "format": "󰋋 {player_icon} {artist} - {title}",
-    "format-paused": "󰏤 {status_icon} {artist} - {title}",
-    "player-icons": {
-      "default": "󰎆",
-      "mpd": "󰎆"
-    },
-    "status-icons": {
-      "paused": "󰏤"
-    },
-    "max-length": 30,
-    "interval": 1
-  },
-  // Módulo de Notificações
-  "custom/notification": {
-    "tooltip": false,
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "<span foreground='red'><sup>󰰔</sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='red'><sup>󰰔</sup></span>",
-      "dnd-none": "",
-      "inhibited-notification": "<span foreground='red'><sup>󰰔</sup></span>",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='red'><sup>󰰔</sup></span>",
-      "dnd-inhibited-none": ""
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
-  },
-  "cpu": {
-    "interval": 2,
-    "format": " {usage}%",
-    "on-click": "kitty --class btop-float -e btop"
-  },
-  "memory": {
-    "interval": 2,
-    "format": " {}%",
-    "tooltip-format": "RAM Usada: {used:0.1f}GiB / {total:0.1f}GiB",
-    "on-click": "kitty --class btop-float -e btop"
-  },
-  "temperature": {
-    "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
-    "critical-threshold": 80,
-    "format": "{icon} {temperatureC}°C",
-    "format-critical": "{icon} {temperatureC}°C",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
+    "modules-center": [
+        "hyprland/workspaces"
     ],
-    "tooltip-format": "Temperatura da CPU: {temperatureC}°C",
-    "interval": 2,
-    "on-click": "kitty --class btop-float -e btop"
-  }
+    "modules-right": [
+        "cpu",
+        "memory",
+        "temperature",
+        "network",
+        "bluetooth",
+        "wireplumber",
+        "backlight",
+        "tray",
+        "clock",
+        "battery"
+    ],
+    "custom/icon": {
+        "format": "\uee15"
+    },
+    "hyprland/window": {
+        "separate-outputs": true,
+        "format": "{class}",
+        "rewrite": {
+            "": "Brizotti",
+            "kitty": "Brizotti",
+            "vesktop": "Discord",
+            "zen": "Browser"
+        }
+    },
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "on-click": "activate",
+        "format": "{icon}",
+        "format-icons": {
+            "1": "i",
+            "2": "ii",
+            "3": "iii",
+            "4": "iv",
+            "5": "v",
+            "6": "vi",
+            "7": "vii",
+            "8": "viii",
+            "9": "ix",
+            "10": "x"
+        }
+    },
+    "network": {
+        "format-wifi": "\udb82\udd28 {essid}",
+        "format-ethernet": "\udb80\ude00 Conectado",
+        "format-linked": "\udb80\ude00 {ifname} (Sem IP)",
+        "format-disconnected": "\udb82\udd2d Desconectado",
+        "tooltip-format-wifi": "Sinal: {signalStrength}% | IP: {ipaddr}",
+        "tooltip-format-ethernet": "Interface: {ifname} | IP: {ipaddr}",
+        "tooltip-format-disconnected": "Sem conex\u00e3o de rede",
+        "on-click": "kitty --class impala-float -e impala",
+        "on-click-right": "kitty -e nmtui"
+    },
+    "bluetooth": {
+        "format": "\udb80\udcaf {status}",
+        "format-disabled": "\udb80\udcb2 Desativado",
+        "format-off": "\udb80\udcb2 Desligado",
+        "format-connected": "\udb80\udcb1 {device_alias}",
+        "format-connected-battery": "\udb80\udcb1 {device_alias} ({device_battery_percentage}%)",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} dispositivo(s) conectado(s)",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} dispositivo(s) conectado(s):\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
+        "on-click": "blueman-manager"
+    },
+    "wireplumber": {
+        "format": "{icon} {volume}%",
+        "format-muted": "\udb81\udf5f Mute",
+        "format-icons": [
+            "\udb81\udd7f",
+            "\udb81\udd80",
+            "\udb81\udd7e"
+        ],
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "scroll-step": 5
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-icons": [
+            "\udb80\udcde",
+            "\udb80\udcdf",
+            "\udb80\udce0"
+        ]
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% \udb80\udc84",
+        "format-plugged": "{capacity}% \udb81\udea5",
+        "format-icons": [
+            "\udb80\udc8e",
+            "\udb80\udc7a",
+            "\udb80\udc7b",
+            "\udb80\udc7c",
+            "\udb80\udc7d",
+            "\udb80\udc7e",
+            "\udb80\udc7f",
+            "\udb80\udc80",
+            "\udb80\udc81",
+            "\udb80\udc82",
+            "\udb80\udc79"
+        ]
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 5,
+        "show-passive-items": true
+    },
+    "clock": {
+        "format": "<span>\uf4ab</span>  {:%H:%M}",
+        "interval": 1,
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "format": {
+                "today": "<span color='#eed49f'><b>{}</b></span>"
+            }
+        },
+        "on-click": "gnome-calendar"
+    },
+    "mpris": {
+        "format": "\udb80\udecb {player_icon} {artist} - {title}",
+        "format-paused": "\udb80\udfe4 {status_icon} {artist} - {title}",
+        "player-icons": {
+            "default": "\udb80\udf86",
+            "mpd": "\udb80\udf86"
+        },
+        "status-icons": {
+            "paused": "\udb80\udfe4"
+        },
+        "max-length": 30,
+        "interval": 1,
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous"
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "\uf0a2<span foreground='red'><sup>\udb83\udc14</sup></span>",
+            "none": "\uf0a2",
+            "dnd-notification": "\uf1f7<span foreground='red'><sup>\udb83\udc14</sup></span>",
+            "dnd-none": "\uf1f7",
+            "inhibited-notification": "\uf0a2<span foreground='red'><sup>\udb83\udc14</sup></span>",
+            "inhibited-none": "\uf0a2",
+            "dnd-inhibited-notification": "\uf1f7<span foreground='red'><sup>\udb83\udc14</sup></span>",
+            "dnd-inhibited-none": "\uf1f7"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
+    "cpu": {
+        "interval": 2,
+        "format": "\uf4bc {usage}%",
+        "on-click": "kitty -e btop",
+        "tooltip": true
+    },
+    "memory": {
+        "interval": 2,
+        "format": "\uefc5 {}%",
+        "tooltip-format": "{used:0.1f}G / {total:0.1f}G",
+        "on-click": "kitty -e btop"
+    },
+    "temperature": {
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input",
+        "critical-threshold": 80,
+        "format": "{icon} {temperatureC}\u00b0C",
+        "format-critical": "{icon} {temperatureC}\u00b0C",
+        "format-icons": [
+            "\uf2cb",
+            "\uf2ca",
+            "\uf2c9",
+            "\uf2c8",
+            "\uf2c7"
+        ],
+        "tooltip-format": "Temperatura da CPU: {temperatureC}\u00b0C",
+        "interval": 2,
+        "on-click": "kitty --class btop-float -e btop"
+    }
 }

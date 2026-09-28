@@ -1,0 +1,241 @@
+// ============================================================================
+// AGS — Barra superior (Omarchy)
+// Catppuccin Macchiato + acento orange #fc7b53
+// Estética: industrial reto — 90°, sem pill, sem bordas arredondadas,
+// quase sem sombra; laranja reservado a workspace ativo/estados críticos.
+// ============================================================================
+
+$rosewater: #f4dbd6;
+$flamingo: #f0c6c6;
+$pink: #f5bde6;
+$mauve: #c6a0f6;
+$red: #ed8796;
+$maroon: #ee99a0;
+$peach: #f5a97f;
+$yellow: #eed49f;
+$green: #a6da95;
+$teal: #8bd5ca;
+$sky: #91d7e3;
+$sapphire: #7dc4e4;
+$blue: #8aadf4;
+$lavender: #b7bdf8;
+$text: #cad3f5;
+$subtext1: #b8c0e0;
+$subtext0: #a5adcb;
+$overlay2: #939ab7;
+$overlay1: #8087a2;
+$overlay0: #6e738d;
+$surface2: #5b6078;
+$surface1: #494d64;
+$surface0: #363a4f;
+$base: #24273a;
+$mantle: #1e2030;
+$crust: #181926;
+$orange: #fc7b53;
+
+* {
+  font-family: "Rubik", "Noto Sans CJK JP", "Noto Sans CJK KR",
+    "JetBrainsMono Nerd Font Propo", sans-serif;
+  font-size: 12px;
+  border-radius: 0px !important;
+  border: none;
+  outline: none;
+}
+
+// ---------------------------------------------------------------------------
+// JANELA — full-width, topo, sem decoração. O fundo translúcido fica no .bar.
+// ---------------------------------------------------------------------------
+window.Bar {
+  background: transparent;
+
+  .bar {
+    background-color: rgba(30, 32, 48, 0.85); // mantle translúcido
+    border-bottom: 1px solid rgba($overlay0, 0.6);
+    min-height: 31px; // + 1px de borda = 32px totais
+  }
+}
+
+.modules {
+  color: $subtext1;
+  min-height: 28px;
+
+  box {
+    border: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// WORKSPACES — blocos retangulares, números 1..10
+// ---------------------------------------------------------------------------
+.workspaces {
+  font-weight: bold;
+
+  button {
+    color: $subtext0;
+    min-width: 24px;
+    min-height: 20px;
+    padding: 0;
+    margin: 0 1px;
+    transition: 120ms ease-out;
+
+    &:hover {
+      background: rgba($surface0, 0.9);
+      color: $text;
+    }
+
+    &.active {
+      background: $orange;
+      color: $crust;
+    }
+
+    &.occupied:not(.active) {
+      color: $text;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// TÍTULO DA JANELA FOCADA
+// ---------------------------------------------------------------------------
+.window-title {
+  color: $text;
+  border-left: 1px solid rgba($overlay0, 0.5);
+  border-right: 1px solid rgba($overlay0, 0.5);
+  padding: 0 10px;
+  margin: 0 4px;
+}
+
+// ---------------------------------------------------------------------------
+// MPRIS — reproduzindo
+// ---------------------------------------------------------------------------
+.mpris {
+  padding: 0 10px;
+  color: $subtext0;
+
+  &.playing {
+    color: $green;
+  }
+
+  &:hover {
+    background: rgba($surface0, 0.6);
+  }
+
+  image {
+    opacity: 0.8;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// CLOCK — HH:mm • seg, dd/mm
+// ---------------------------------------------------------------------------
+.clock {
+  font-weight: bold;
+  color: $text;
+  padding: 0 8px;
+
+  .date {
+    font-weight: normal;
+    color: $subtext0;
+    font-size: 11px;
+  }
+
+  .sep {
+    color: $overlay1;
+    font-weight: normal;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// NETWORK / VOLUME
+// ---------------------------------------------------------------------------
+.network,
+.volume {
+  color: $text;
+  font-weight: bold;
+  padding: 0 8px;
+
+  &:hover {
+    background: rgba($surface0, 0.6);
+  }
+}
+
+.volume.muted {
+  color: $red;
+}
+
+// ---------------------------------------------------------------------------
+// BATTERY
+// ---------------------------------------------------------------------------
+.battery {
+  color: $text;
+  font-weight: bold;
+  padding: 0 8px;
+
+  &.charging {
+    color: $green;
+  }
+
+  &.critical {
+    color: $red;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// TRAY
+// ---------------------------------------------------------------------------
+.tray {
+  padding: 0 4px;
+
+  .tray-item {
+    padding: 0 2px;
+
+    &:hover {
+      background: rgba($surface0, 0.6);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// NOTIFICATIONS — sino + contador
+// ---------------------------------------------------------------------------
+.notifications {
+  color: $text;
+  padding: 0 8px;
+  border-left: 1px solid rgba($overlay0, 0.5);
+  margin: 0 0 0 6px;
+
+  .count {
+    background: $orange;
+    color: $crust;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 16px;
+    padding: 0 2px;
+  }
+
+  &.dnd {
+    color: $overlay0;
+
+    .count {
+      background: $surface1;
+      color: $subtext0;
+    }
+  }
+
+  &:hover {
+    background: rgba($surface0, 0.6);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// TOOLTIP — fundo crust, 1px, reto
+// ---------------------------------------------------------------------------
+tooltip {
+  background: rgba(24, 25, 38, 0.95);
+  border: 1px solid rgba($overlay0, 0.8);
+  color: $text;
+}
+
+tooltip label {
+  color: $text;
+}

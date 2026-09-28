@@ -435,6 +435,8 @@ _(preencher a cada fase)_
 | `3e40e4f` | termo | Inicia `temp-watch` no autostart do Hyprland (appearance.lua); renomeia para binário sem `.sh` p/ PATH do Hyprland resolver |
 | `(novo)` | termo | Config custom do thermald: `thermal-conf.xml` (PID 80°C/kp=0.001 no `x86_pkg_temp`) + drop-in `--ignore-default-control`; versiona templates em setup/ e documenta achados |
 | `(novo)` | lock | Hyprlock: `font_family = JetBrainsMono Nerd Font` no `input-field`; corrige `##a5adcb` → `#a5adcb` e remove `<i>` do "Digite a senha..." |
+| `checkpoint-pre-ags` | ags | Tag de rollback antes da remoção do waybar/swaync/wofi (HEAD `cedc79d5`) |
+| `4b02a53` | ags | **Fase 0 (migração AGS):** `git rm waybar/ swaync/ wofi/`; `stow.sh PACKAGES` remove waybar+wofi; corrige drift `hypr/config` no AGENTS (é stowed/symlinked); refs de config exportadas em `/tmp/waybar-ref/` |
 
 ---
 

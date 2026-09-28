@@ -16,9 +16,16 @@ export function Battery() {
   })
   const label = createComputed(() => `${Math.floor(pct.get() * 100)}%`)
 
+  const cls = createComputed(() => {
+    let c = "battery"
+    if (charging.get()) c += " charging"
+    else if ((pct.get() || 0) < 0.2) c += " critical"
+    return c
+  })
+
   return (
-    <box class="battery" visible={isPresent} spacing={4} tooltipText={label}>
-      <image iconName={icon} pixelSize={16} />
+    <box class={cls} visible={isPresent} spacing={4} tooltipText={label}>
+      <image iconName={icon} pixelSize={15} />
       <label label={label} visible={!charging} />
     </box>
   )

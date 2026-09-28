@@ -1,6 +1,6 @@
 import { createBinding, createComputed, With } from "ags"
-import { execAsync } from "ags/process"
 import { Astal, Gtk } from "ags/gtk4"
+import Pango from "gi://Pango"
 import AstalMpris from "gi://AstalMpris"
 
 export function Mpris() {
@@ -13,19 +13,26 @@ export function Mpris() {
   const cls = createComputed(() =>
     playing.get() ? "mpris playing" : "mpris",
   )
-  const text = createComputed(() =>
-    title.get() && artist.get() ? `${title.get()} · ${artist.get()}` : title.get(),
-  )
+  const text = createComputed(() => {
+    const t = title.get()
+    const a = artist.get()
+    if (t && a) return `${a} - ${t}`
+    return t
+  })
 
   return (
     <button
       class={cls}
       visible={title.as((t) => !!t)}
-      onClicked={() => execAsync('playerctl play-pause')}
+      onClicked={() => player.get()?.play_pause()}
     >
       <box spacing={6}>
         <image iconName="media-playback-start-symbolic" pixelSize={12} />
-        <label label={text} maxWidthChars={42} ellipsize="end" />
+        <label
+          label={text}
+          maxWidthChars={42}
+          ellipsize={Pango.EllipsizeMode.END}
+        />
       </box>
     </button>
   )

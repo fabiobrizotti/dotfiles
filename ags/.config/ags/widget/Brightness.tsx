@@ -1,5 +1,4 @@
 import { createBinding, createComputed, With } from "ags"
-import { execAsync } from "ags/process"
 import { Astal, Gtk } from "ags/gtk4"
 import AstalBrightness from "gi://AstalBrightness"
 
@@ -12,7 +11,11 @@ export function Brightness() {
   return (
     <button
       class="backlight"
-      onClicked={() => execAsync("brightnessctl set 10%-")}
+      onClicked={() =>
+                scr.screen?.set_brightness(
+                  Math.max(0.05, (scr.screen?.brightness || 0) - 0.1),
+                )
+              }
       tooltipText={pct}
     >
       <box spacing={4}>

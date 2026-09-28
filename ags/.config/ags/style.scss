@@ -1,4 +1,10 @@
+// ============================================================================
+// AGS — Barra superior (Omarchy)
 // Catppuccin Macchiato + acento orange #fc7b53
+// Estética: industrial reto — 90°, sem pill, sem bordas arredondadas,
+// quase sem sombra; laranja reservado a workspace ativo/estados críticos.
+// ============================================================================
+
 $rosewater: #f4dbd6;
 $flamingo: #f0c6c6;
 $pink: #f5bde6;
@@ -28,56 +34,58 @@ $crust: #181926;
 $orange: #fc7b53;
 
 * {
-  font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 13px;
+  font-family: "Rubik", "Noto Sans CJK JP", "Noto Sans CJK KR",
+    "JetBrainsMono Nerd Font Propo", sans-serif;
+  font-size: 12px;
+  border-radius: 0px !important;
   border: none;
+  outline: none;
 }
 
-// Barra "pill" flutuante — fundo mantle translúcido, Hyprland blura o fundo.
+// ---------------------------------------------------------------------------
+// JANELA — full-width, topo, sem decoração. O fundo translúcido fica no .bar.
+// ---------------------------------------------------------------------------
 window.Bar {
   background: transparent;
 
-  .bar-pill {
-    background-color: rgba(30, 32, 48, 0.55);
-    border: 1px solid rgba($orange, 0.4);
-    border-radius: 14px;
-    color: $sapphire;
-    padding: 6px 12px;
-    min-height: 24px;
+  .bar {
+    background-color: rgba(30, 32, 48, 0.85); // mantle translúcido
+    border-bottom: 1px solid rgba($overlay0, 0.6);
+    min-height: 31px; // + 1px de borda = 32px totais
   }
 }
 
 .modules {
-  color: $orange;
-  min-height: 24px;
+  color: $subtext1;
+  min-height: 28px;
 
-  .modules.start,
-  // .modules.end and .modules.center padding via child boxes
   box {
     border: none;
   }
 }
 
-// WORKSPACES — numerais romanos
+// ---------------------------------------------------------------------------
+// WORKSPACES — blocos retangulares, números 1..10
+// ---------------------------------------------------------------------------
 .workspaces {
   font-weight: bold;
-  font-size: 11px;
 
   button {
-    color: $orange;
-    padding: 0 8px;
-    border-radius: 10px;
-    margin: 0 2px;
-    transition: 150ms ease-out;
+    color: $subtext0;
+    min-width: 24px;
+    min-height: 20px;
+    padding: 0;
+    margin: 0 1px;
+    transition: 120ms ease-out;
 
     &:hover {
-      background: rgba($surface1, 0.7);
+      background: rgba($surface0, 0.9);
+      color: $text;
     }
 
     &.active {
-      background: rgba($orange, 0.85);
+      background: $orange;
       color: $crust;
-      border-radius: 12px;
     }
 
     &.occupied:not(.active) {
@@ -86,43 +94,82 @@ window.Bar {
   }
 }
 
-// MPRIS — pill verde quando tocando
+// ---------------------------------------------------------------------------
+// TÍTULO DA JANELA FOCADA
+// ---------------------------------------------------------------------------
+.window-title {
+  color: $text;
+  border-left: 1px solid rgba($overlay0, 0.5);
+  border-right: 1px solid rgba($overlay0, 0.5);
+  padding: 0 10px;
+  margin: 0 4px;
+}
+
+// ---------------------------------------------------------------------------
+// MPRIS — reproduzindo
+// ---------------------------------------------------------------------------
 .mpris {
   padding: 0 10px;
-  color: $green;
-  font-weight: bold;
-  background-color: rgba($surface0, 0.5);
-  border: 1px solid rgba($green, 0.25);
-  border-radius: 8px;
-  margin: 2px 5px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-  transition: 150ms ease-out;
+  color: $subtext0;
 
-  &:not(.playing) {
-    color: $subtext0;
-    background-color: transparent;
-    border-color: transparent;
-    box-shadow: none;
+  &.playing {
+    color: $green;
+  }
+
+  &:hover {
+    background: rgba($surface0, 0.6);
+  }
+
+  image {
+    opacity: 0.8;
   }
 }
 
-// CLOCK
+// ---------------------------------------------------------------------------
+// CLOCK — HH:mm • seg, dd/mm
+// ---------------------------------------------------------------------------
 .clock {
   font-weight: bold;
-  color: $orange;
-  transition: 150ms ease-out;
+  color: $text;
+  padding: 0 8px;
 
   .date {
     font-weight: normal;
     color: $subtext0;
     font-size: 11px;
   }
+
+  .sep {
+    color: $overlay1;
+    font-weight: normal;
+  }
 }
 
-// BATTERY
-.battery {
-  color: $orange;
+// ---------------------------------------------------------------------------
+// NETWORK / VOLUME
+// ---------------------------------------------------------------------------
+.network,
+.volume {
+  color: $text;
   font-weight: bold;
+  padding: 0 8px;
+
+  &:hover {
+    background: rgba($surface0, 0.6);
+  }
+}
+
+.volume.muted {
+  color: $red;
+}
+
+// ---------------------------------------------------------------------------
+// BATTERY
+// ---------------------------------------------------------------------------
+.battery {
+  color: $text;
+  font-weight: bold;
+  padding: 0 8px;
 
   &.charging {
     color: $green;
@@ -133,63 +180,59 @@ window.Bar {
   }
 }
 
-// NETWORK / VOLUME / BACKLIGHT / HARDWARE
-.network,
-.volume,
-.backlight {
-  color: $orange;
-  font-weight: bold;
-  padding: 0 8px;
-  border-radius: 10px;
-  transition: 150ms ease-out;
-
-  &:hover {
-    color: $yellow;
-    background: rgba($surface1, 0.5);
-  }
-}
-
-.volume.muted {
-  color: $red;
-}
-
-.hardware {
-  color: $subtext1;
-  font-size: 11px;
-
-  .hw-group {
-    padding: 0 2px;
-
-    &:hover {
-      color: $orange;
-    }
-
-    image {
-      opacity: 0.7;
-    }
-  }
-}
-
+// ---------------------------------------------------------------------------
 // TRAY
+// ---------------------------------------------------------------------------
 .tray {
-  color: $orange;
-  transition: 150ms ease-out;
+  padding: 0 4px;
 
   .tray-item {
-    border-radius: 8px;
     padding: 0 2px;
 
     &:hover {
-      background: rgba($surface1, 0.5);
+      background: rgba($surface0, 0.6);
     }
   }
 }
 
-// TOOLTIP — mesma linguagem glass
+// ---------------------------------------------------------------------------
+// NOTIFICATIONS — sino + contador
+// ---------------------------------------------------------------------------
+.notifications {
+  color: $text;
+  padding: 0 8px;
+  border-left: 1px solid rgba($overlay0, 0.5);
+  margin: 0 0 0 6px;
+
+  .count {
+    background: $orange;
+    color: $crust;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 16px;
+    padding: 0 2px;
+  }
+
+  &.dnd {
+    color: $overlay0;
+
+    .count {
+      background: $surface1;
+      color: $subtext0;
+    }
+  }
+
+  &:hover {
+    background: rgba($surface0, 0.6);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// TOOLTIP — fundo crust, 1px, reto
+// ---------------------------------------------------------------------------
 tooltip {
   background: rgba(24, 25, 38, 0.95);
-  border: 1px solid rgba($orange, 0.4);
-  border-radius: 10px;
+  border: 1px solid rgba($overlay0, 0.8);
   color: $text;
 }
 

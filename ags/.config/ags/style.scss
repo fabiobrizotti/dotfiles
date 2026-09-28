@@ -1,20 +1,198 @@
-// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-$fg-color: #{"@theme_fg_color"};
-$bg-color: #{"@theme_bg_color"};
+// Catppuccin Macchiato + acento orange #fc7b53
+$rosewater: #f4dbd6;
+$flamingo: #f0c6c6;
+$pink: #f5bde6;
+$mauve: #c6a0f6;
+$red: #ed8796;
+$maroon: #ee99a0;
+$peach: #f5a97f;
+$yellow: #eed49f;
+$green: #a6da95;
+$teal: #8bd5ca;
+$sky: #91d7e3;
+$sapphire: #7dc4e4;
+$blue: #8aadf4;
+$lavender: #b7bdf8;
+$text: #cad3f5;
+$subtext1: #b8c0e0;
+$subtext0: #a5adcb;
+$overlay2: #939ab7;
+$overlay1: #8087a2;
+$overlay0: #6e738d;
+$surface2: #5b6078;
+$surface1: #494d64;
+$surface0: #363a4f;
+$base: #24273a;
+$mantle: #1e2030;
+$crust: #181926;
+$orange: #fc7b53;
 
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
+  border: none;
+}
+
+// Barra "pill" flutuante — fundo mantle translúcido, Hyprland blura o fundo.
 window.Bar {
   background: transparent;
-  color: $fg-color;
-  font-weight: bold;
 
-  > centerbox {
-    background: $bg-color;
-    border-radius: 10px;
-    margin: 8px;
+  .bar-pill {
+    background-color: rgba(30, 32, 48, 0.55);
+    border: 1px solid rgba($orange, 0.4);
+    border-radius: 14px;
+    color: $sapphire;
+    padding: 6px 12px;
+    min-height: 24px;
   }
+}
+
+.modules {
+  color: $orange;
+  min-height: 24px;
+
+  .modules.start,
+  // .modules.end and .modules.center padding via child boxes
+  box {
+    border: none;
+  }
+}
+
+// WORKSPACES — numerais romanos
+.workspaces {
+  font-weight: bold;
+  font-size: 11px;
 
   button {
-    border-radius: 8px;
-    margin: 2px;
+    color: $orange;
+    padding: 0 8px;
+    border-radius: 10px;
+    margin: 0 2px;
+    transition: 150ms ease-out;
+
+    &:hover {
+      background: rgba($surface1, 0.7);
+    }
+
+    &.active {
+      background: rgba($orange, 0.85);
+      color: $crust;
+      border-radius: 12px;
+    }
+
+    &.occupied:not(.active) {
+      color: $text;
+    }
   }
+}
+
+// MPRIS — pill verde quando tocando
+.mpris {
+  padding: 0 10px;
+  color: $green;
+  font-weight: bold;
+  background-color: rgba($surface0, 0.5);
+  border: 1px solid rgba($green, 0.25);
+  border-radius: 8px;
+  margin: 2px 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: 150ms ease-out;
+
+  &:not(.playing) {
+    color: $subtext0;
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+}
+
+// CLOCK
+.clock {
+  font-weight: bold;
+  color: $orange;
+  transition: 150ms ease-out;
+
+  .date {
+    font-weight: normal;
+    color: $subtext0;
+    font-size: 11px;
+  }
+}
+
+// BATTERY
+.battery {
+  color: $orange;
+  font-weight: bold;
+
+  &.charging {
+    color: $green;
+  }
+
+  &.critical {
+    color: $red;
+  }
+}
+
+// NETWORK / VOLUME / BACKLIGHT / HARDWARE
+.network,
+.volume,
+.backlight {
+  color: $orange;
+  font-weight: bold;
+  padding: 0 8px;
+  border-radius: 10px;
+  transition: 150ms ease-out;
+
+  &:hover {
+    color: $yellow;
+    background: rgba($surface1, 0.5);
+  }
+}
+
+.volume.muted {
+  color: $red;
+}
+
+.hardware {
+  color: $subtext1;
+  font-size: 11px;
+
+  .hw-group {
+    padding: 0 2px;
+
+    &:hover {
+      color: $orange;
+    }
+
+    image {
+      opacity: 0.7;
+    }
+  }
+}
+
+// TRAY
+.tray {
+  color: $orange;
+  transition: 150ms ease-out;
+
+  .tray-item {
+    border-radius: 8px;
+    padding: 0 2px;
+
+    &:hover {
+      background: rgba($surface1, 0.5);
+    }
+  }
+}
+
+// TOOLTIP — mesma linguagem glass
+tooltip {
+  background: rgba(24, 25, 38, 0.95);
+  border: 1px solid rgba($orange, 0.4);
+  border-radius: 10px;
+  color: $text;
+}
+
+tooltip label {
+  color: $text;
 }

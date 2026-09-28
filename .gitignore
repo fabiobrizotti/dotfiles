@@ -28,6 +28,10 @@ session/
 .planning/
 graphify-out/
 
+# Logs transitórios de validação de layout (ags/hypr)
+radius.log
+rounding.log
+
 # Exceção: o pacote Stow 'localbin' versiona scripts em localbin/.local/bin
 # (o padrão '.local/' acima ignora dados de apps; este é o nosso próprio script)
 !localbin/

@@ -461,9 +461,20 @@ _(preencher a cada fase)_
 - [x] Validado no runtime: proceso gjs carrega `libgtk-4.so` + `libastal-4.so`; barra `gtk4-layer-shell` 1920×38 no layer top
 - [x] **Achado:** window gtk4 exige `visible` + `layer` explícitos (JSX gtk3 omitia). `--adopt` do stow sobrescreve fontes → só usar em pacote novo com fontes idênticos, jamais sobre edições
 
-### Fase 3 — Barra (pendente)
-- Migrar `style.css` → `style.scss` origem waybar-glass (`/tmp/waybar-ref/`)
-- Workspaces romanos I–X com crossfade; relógio, bateria, rede, bluetooth, MPRIS, tray, cpu/cputemp/mem/disco/temp; 8 `on-click` portados
+### Fase 3 — Barra ✅
+- [x] `style.scss` glass Macchiato portado (fundo mantle translúcido + border orange + radius 14; workspaces romanos I–X, mpris pill, clock, battery, network, volume, backlight, hardware, tray, tooltip)
+- [x] Módulos: `Workspaces` (bind `focused-workspace`/`workspaces`, dispatch), `Clock` (createPoll), `Battery` (AstalBattery), `Network` (AstalNetwork, click→impala), `Volume` (AstalWp `default_speaker`, click→wpctl mute), `Brightness` (AstalBrightness `screen`, click→brightnessctl), `Mpris` (AstalMpris, click→playerctl), `Tray` (AstalTray, GestureClick+Popover), `Hardware` (SystemMonitor)
+- [x] Serviço próprio `SystemMonitor` (`@register`): cpu via delta `/proc/stat`, mem `/proc/meminfo`, temp `hwmon4/temp1_input` (fallback thermal_zone0), disco via `df -P /` — sem GTop/AstalBluetooth (adiado)
+- [x] Validado no runtime: barra `gtk4-layer-shell` **1920×38** no layer top, **sem erros JS**, ~49 binds, processos `hyprpaper hypridle ags`
+- [x] **Achados:**
+  - Imports gi com prefixo `Astal*` para **evitar shadowing** do nome do componente (`function Mpris()` colidia com `import Mpris` → `get_default is not a function`)
+  - JSX do gnim/gtk4 usa **`class`** (não `className`) e prop **`css`**; ambas aceitam Accessor
+  - Propriedades das libs Astal são de objetos aninhados: `Wp.audio.default_speaker`, `Brightness.screen.brightness`, `Network.wifi.internet` — não no singleton
+  - `createPoll(init, ms, fn)` — `init` deve ser do tipo do resultado (string), senão label recebe número
+  - `execAsync` não interpreta pipes (`df -P / | tail -1` falha) → passar argv array
+  - gtk4 não tem prop `truncate` no label → usar `ellipsize`
+  - `For` requer `each` como Accessor (`createComputed`)
+  - dart-sass: usar `rgba($cor, alfa)` (libsass `alpha()` não compila)
 
 ### Fase 4 — Notificações (pendente)
 ### Fase 5 — Áudio/mídia/brilho (pendente)

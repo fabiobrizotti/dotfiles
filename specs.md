@@ -440,6 +440,38 @@ _(preencher a cada fase)_
 
 ---
 
+## 🚀 Migração Waybar/SwayNC/Wofi → AGS v3 (GTK4)
+
+> Plano e checklist completo na nota de vault `Migracao Waybar-para-AGS` (N1). Aqui só o progresso em alto nível + o que já foi aprendido/validado.
+
+### Fase 0 — Limpeza do repo ✅
+- [x] `waybar/` `swaync/` `wofi/` removidos do repo e do stow (commit `4b02a53`)
+- [x] `AGENTS.md` regrava o aviso de migração (sistema transicionalmente inconsistente até a Fase 6)
+- [x] Tag `checkpoint-pre-ags` criada (`cedc79d5`)
+
+### Fase 1 — Dependências Astal ✅
+- [x] 10 serviços instalados via AUR (r986.cbcd9f4-1): hyprland, battery, network, tray, brightness, notifd, apps, mpris, wireplumber, powerprofiles (+ deps de build) — **sem `libastal-meta`**
+- [x] Smoke test gjs: `gi://Astal*` importa e singletons respondem (Notifd, Battery 100%, Apps 36 apps)
+- [x] Tipagem: `/usr/lib/girepository-1.0/Astal*-0.1.typelib` presentes; `@girs/astal-4.0.d.ts` etc.
+
+### Fase 2 — Versionar AGS ✅
+- [x] Pacote stow `ags/` criado (`ags/.config/ags/*` versionados; `node_modules/`+`@girs/` fora do git E do stow via `.stow-local-ignore`)
+- [x] Convertido `ags/gtk3` → `ags/gtk4`: `app.ts`, `widget/Bar.tsx`, `tsconfig.json` (`jsxImportSource: ags/gtk4`)
+- [x] `ags` adicionado ao `PACKAGES` do `stow.sh`
+- [x] Validado no runtime: proceso gjs carrega `libgtk-4.so` + `libastal-4.so`; barra `gtk4-layer-shell` 1920×38 no layer top
+- [x] **Achado:** window gtk4 exige `visible` + `layer` explícitos (JSX gtk3 omitia). `--adopt` do stow sobrescreve fontes → só usar em pacote novo com fontes idênticos, jamais sobre edições
+
+### Fase 3 — Barra (pendente)
+- Migrar `style.css` → `style.scss` origem waybar-glass (`/tmp/waybar-ref/`)
+- Workspaces romanos I–X com crossfade; relógio, bateria, rede, bluetooth, MPRIS, tray, cpu/cputemp/mem/disco/temp; 8 `on-click` portados
+
+### Fase 4 — Notificações (pendente)
+### Fase 5 — Áudio/mídia/brilho (pendente)
+### Fase 6 — Erradicar refs do Hyprland (pendente)
+### Fase 7 — Docs (pendente)
+
+---
+
 ## 🔄 Como retomar o trabalho
 
 1. `cd ~/dotfiles && git checkout dev`

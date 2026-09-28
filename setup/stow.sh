@@ -10,7 +10,7 @@
 set -euo pipefail
 
 DOTFILES_DIR="$HOME/dotfiles"
-PACKAGES=(gtk hypr kitty lazygit localbin qt starship zsh)
+PACKAGES=(ags gtk hypr kitty lazygit localbin qt starship zsh)
 
 cd "$DOTFILES_DIR"
 

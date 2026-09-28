@@ -10,6 +10,7 @@ Dotfiles for **Arch + Hyprland (Lua config)**, Catppuccin Macchiato + Orange, ma
 ## Critical: live symlink setup
 Files in `~/dotfiles/*/.config/...` are the **originals**; `~/.config/<app>` entries are **symlinks** into this repo via GNU Stow. **Editing here changes the running system immediately.** Always validate after editing the config of a running app.
 - Exception: `hypr/.config/hypr/config/*.lua` modules load via **absolute path** into the repo (see Hyprland quirks below). **Confirmed 2026-09-28:** `hypr/` **is** part of the stow `PACKAGES` and `~/.config/hypr/config` **does** exist as a symlink into the repo — the two access paths (`~/.config/hypr/config/appearance.lua` via symlink, and the absolute `dofile` path in `hyprland.lua`) point at the **same** files. Editing in the repo changes the running system by both routes.
+- AGS (`ags/` pacote): os **fontes** (`app.ts`, `widget/`, `style.scss`, `tsconfig.json`, `package.json`, `env.d.ts`) são symlinks do repo; **`node_modules/` e `@girs/` ficam como diretórios locais** em `~/.config/ags` (fora do stow via `ags/.stow-local-ignore` e fora do git). Serviços Astal vêm do sistema via `gi://Astal*` (não do npm), e `ags/gtk4/app` resolve de `/usr/share/ags/js`. Sempre validar com `agss` rodando (ver Validation).
 
 ## Git workflow (hard rules)
 - Work only on branch **`dev`**. **Never push/merge to `main`** without explicit user approval.
@@ -25,7 +26,7 @@ Files in `~/dotfiles/*/.config/...` are the **originals**; `~/.config/<app>` ent
 ## Validation (required after Hyprland config changes)
 - `luac -p <file>` for syntax, then `hyprctl reload` (expect `ok`) and `hyprctl getoption decoration:blur:size` / `decoration:blur:passes` to confirm.
 - Valid state = **~49 active binds** (`hyprctl binds | grep -c '^bind$'`), workspaces switching, processes running: `hyprpaper hypridle ags` (após Fase 3; hoje `waybar hyprpaper swaync swayosd-server hypridle` enquanto a migração não termina).
-- Stow packages: `PACKAGES=(gtk hypr kitty lazygit localbin qt starship zsh)`. Re-apply a package after removing an original dir: `stow --restow --target="$HOME" <pkg>`.
+- Stow packages: `PACKAGES=(ags gtk hypr kitty lazygit localbin qt starship zsh)`. Re-apply a package after removing an original dir: `stow --restow --target="$HOME" <pkg>`. **Cuidado com `--adopt`:** adota arquivos do target sobre os do repo — só usar num pacote novo com fontes idênticos, nunca sobre edições feitas no repo.
 - Thermal: `temp-watch` (pacote `localbin`) monitora a CPU no autostart do Hyprland; alerta via SwayNC a 85°C e crítico a 90°C. Daemons: `thermald` + `auto-cpufreq` (Trilha A; sem PWM/fancontrol neste laptop).
 
 ## Security / root access (sensitive)
